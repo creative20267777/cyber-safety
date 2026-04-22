@@ -6,145 +6,32 @@
     <title>資安讚 | 數位資產風險診斷</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("mX1YOSb8myOui7Bp3"); // 你的 Public Key
+        })();
+    </script>
+
     <style>
-        :root {
-            --primary-blue: #0ea5e9;
-            --gradient-tech: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-        }
-
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background: radial-gradient(circle at top left, #1e293b, #020617 80%);
-            background-color: #020617;
-            margin: 0;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #f8fafc;
-            padding: 12px;
-            overflow-x: hidden;
-        }
-
-        .container-box {
-            background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            width: 100%;
-            max-width: 550px;
-            min-height: 550px;
-            padding: 50px 24px 40px 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            margin: auto;
-        }
-
-        @media (max-width: 400px) {
-            .container-box { padding: 45px 16px 30px 16px; min-height: 500px; }
-            .logo-text { font-size: 2.8rem !important; }
-        }
-
-        .logo-text {
-            font-size: clamp(3rem, 12vw, 4rem);
-            font-weight: 900;
-            background: var(--gradient-tech);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-        }
-
-        .subtitle-text {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .q-label {
-            font-size: 0.75rem;
-            color: var(--primary-blue);
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .q-title {
-            font-size: clamp(1.1rem, 4.5vw, 1.35rem);
-            font-weight: 700;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            color: #ffffff;
-        }
-
-        .btn-answer, .btn-option, .btn-role {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #e2e8f0;
-            text-align: left;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            margin-bottom: 12px;
-            cursor: pointer;
-        }
+        :root { --primary-blue: #0ea5e9; --gradient-tech: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); }
+        body { font-family: 'Noto Sans TC', sans-serif; background: radial-gradient(circle at top left, #1e293b, #020617 80%); background-color: #020617; margin: 0; min-height: 100vh; min-height: -webkit-fill-available; display: flex; align-items: center; justify-content: center; color: #f8fafc; padding: 12px; overflow-x: hidden; }
+        .container-box { background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); width: 100%; max-width: 550px; min-height: 550px; padding: 50px 24px 40px 24px; position: relative; display: flex; flex-direction: column; margin: auto; }
+        @media (max-width: 400px) { .container-box { padding: 45px 16px 30px 16px; min-height: 500px; } .logo-text { font-size: 2.8rem !important; } }
+        .logo-text { font-size: clamp(3rem, 12vw, 4rem); font-weight: 900; background: var(--gradient-tech); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 8px; letter-spacing: -1px; }
+        .subtitle-text { color: #94a3b8; font-size: 0.95rem; text-align: center; margin-bottom: 30px; }
+        .q-label { font-size: 0.75rem; color: var(--primary-blue); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; }
+        .q-title { font-size: clamp(1.1rem, 4.5vw, 1.35rem); font-weight: 700; line-height: 1.6; margin-bottom: 25px; color: #ffffff; }
+        .btn-answer, .btn-option, .btn-role { width: 100%; padding: 14px 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #e2e8f0; text-align: left; font-size: 0.95rem; transition: all 0.2s ease; margin-bottom: 12px; cursor: pointer; }
         .btn-option, .btn-role { text-align: center; font-weight: 600; }
-
-        .btn-answer:active, .btn-option:active {
-            transform: scale(0.98);
-            background: rgba(14, 165, 233, 0.3);
-        }
-
-        .email-input {
-            width: 100%;
-            padding: 14px;
-            background: #0f172a;
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: white;
-            margin-bottom: 10px;
-            font-size: 16px; 
-        }
-
-        #back-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            color: #64748b;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .progress-track {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            height: 4px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        #progress-bar {
-            height: 100%;
-            background: var(--primary-blue);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
+        .btn-answer:active, .btn-option:active { transform: scale(0.98); background: rgba(14, 165, 233, 0.3); }
+        .email-input { width: 100%; padding: 14px; background: #0f172a; border: 1.5px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: white; margin-bottom: 10px; font-size: 16px; }
+        #back-btn { position: absolute; top: 15px; left: 15px; color: #64748b; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; }
+        .progress-track { width: 100%; background: rgba(255, 255, 255, 0.05); height: 4px; border-radius: 10px; margin-top: 20px; }
+        #progress-bar { height: 100%; background: var(--primary-blue); width: 0%; transition: width 0.3s ease; }
         .risk-level { font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 10px; }
         .score-val { font-size: 3rem; color: white; font-weight: 900; }
-        
         .hidden { display: none !important; }
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -157,9 +44,7 @@
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             返回
         </button>
-
         <div id="main-content"></div>
-
         <div id="quiz-footer" class="hidden mt-auto">
             <div class="progress-track"><div id="progress-bar"></div></div>
             <p id="progress-text" class="text-center text-[10px] mt-2 text-slate-500 font-mono"></p>
@@ -167,6 +52,7 @@
     </div>
 
     <script>
+        // 題目資料庫 - 完全保留原字、原意、原分數
         const allQuestions = {
             "clinic_boss": [
                 { q: "診所內的病患資料（如病歷、聯絡方式）通常如何儲存與調用？", a: ["集中儲存於醫療系統，且所有調用都有紀錄", "以醫療系統為主，但部分資料會額外記錄在Excel或紙本", "系統、紙本、通訊軟體工具混用，無統一存放點", "資料分散在不同設備且無法有效掌握完整流向"], p: [0, 5, 10, 15] },
@@ -183,14 +69,14 @@
             "clinic_staff": [
                 { q: "在診所日常工作中，您能接觸到的病患個資（如電話、住址）範圍為何？", a: ["僅限於該職務必要接觸的極少部分內容", "大部分病患的基本聯絡資料皆可隨意點閱", "幾乎可以看見完整的醫療診斷紀錄與病患全資", "沒有任何權限限制，所有人的病歷與資訊皆可查"], p: [0, 5, 10, 15] },
                 { q: "當病患在社群平台（如 LINE）詢問個人資訊時，您的處理方式通常是？", a: ["僅引導至診所官方系統查詢或依照正規管道發布", "偶爾會為了服務效率，私下用個人 LINE 傳給病患", "常直接將病患資料截圖，透過通訊軟體直接傳送", "幾乎所有病患溝通與資料往來都在個人通訊軟體"], p: [0, 5, 10, 15] },
-                { q: "您是否曾因工作方便，使用個人手機拍攝、存取或傳送病患的相關資料？", a: ["從未發生過，診所嚴格要求禁止使用個人設備", "偶爾因電腦故障或急用，會短暫使用手機處理", "經常使用私人設備進行溝通或資料傳遞以求效率", "私人設備與公務設備已高度重疊，資料皆在其中"], p: [0, 5, 10, 15] },
+                { q: "您是否曾因工作方便，使用個人手機拍攝、存取或傳送病患的相關資料？", a: ["從未發生過，診所嚴格要求禁止使用個人設備", "偶爾因電腦故障或急用，會短暫使用手機處理", "經常使用私人設備進行溝通或資料傳遞以求效率", "私人設備與公務設備已高度重疊，資料都在其中"], p: [0, 5, 10, 15] },
                 { q: "您的個人手機或相簿中，目前是否存有任何病患的個資截圖、報表或照片？", a: ["完全沒有，這是我非常注意避免的行為", "有極少數的過往工作紀錄，但尚未進行清理", "存有一定數量的病患資料，用於平時工作參考", "存有非常多病患資料，且這在診所內是普遍現象"], p: [0, 5, 10, 15] },
                 { q: "在傳送病患資訊（如報名表或結果）時，是否曾發生傳錯對象或傳至群組的情況？", a: ["沒有發生過，傳送前都會經過多次確認", "偶爾發生差點傳錯的情形，但有及時攔截", "曾實際發生過傳錯對象，並造成病患端疑慮", "發生過數次傳錯情事，且對診所造成實際麻煩"], p: [0, 5, 10, 15] },
                 { q: "關於診所行政或醫療系統的帳號，您目前的登入習慣是？", a: ["僅使用自己的專屬帳號，且不會與他人共用密碼", "有專屬帳號，但有時會為了方便將密碼告訴同事", "帳號是小組或前台共用的，多人知曉同一組密碼", "並不清楚是否有區分，大家都用同一個帳號登入"], p: [0, 5, 10, 15] },
                 { q: "當您收到包含網址連結的通知（如醫療補助或健保局公文）時？", a: ["一定先確認發送來源與官方公告，不敢隨意點擊", "視情況判斷，如果是工作群組傳來的就會點開", "曾直接點擊過看似正式但來路不明連結", "曾因誤點連結導致設備中毒或造成資安問題"], p: [0, 5, 10, 15] },
                 { q: "對於「哪些資料屬於不能外流的營業秘密或個資」，診所是否提供明確訓練？", a: ["非常清楚，診所有提供教育訓練且有簽署規範", "大致了解，但細部的法律邊界與風險不太清楚", "有些模糊，主要是靠自己平常的經驗與習慣判斷", "完全不清楚，沒人告知過哪些資料外傳會有法律責任"], p: [0, 5, 10, 15] },
                 { q: "若發現同事資料處理不當（如將資料帶走或亂傳），您的通常反應是？", a: ["會立即依照診所規定的流程進行通報或回報", "會視情節大小決定，嚴重的話才會跟上級反映", "通常會先觀望，或私下提醒同事但不會主動回報", "認為這是大家的習慣，不會特別覺得這需要處理"], p: [0, 5, 10, 15] },
-                { q: "如果您計畫離職，您通常會如何處理手機或電腦中留下的病患相關資料？", a: ["會主動在離職前將所有工作相關個資進行清空", "會清理大部分，但可能留存一些關鍵資料作參考", "並不會特別去清理，除非診所有強烈要求或檢查", "會全數保留，因為這些是我在職期間經營的成果"], p: [0, 5, 10, 15] }
+                { q: "如果您計畫離職，您通常會如何處理手機或電腦中留下的病患相關資料？", a: ["會主動在離職前將所有工作相關個資進行清空", "會清理大部分，但可能留存一些關鍵資料作參考", "並不會特別去清理，除非診所有強烈要求或檢查", "會全數保留，因為這些資料未來對我的職涯發展有幫助"], p: [0, 5, 10, 15] }
             ],
             "ecommerce_boss": [
                 { q: "貴公司的訂單資料與客戶清單，目前主要的流動與存放狀態為何？", a: ["嚴格鎖定於官網後台系統，無法隨意匯出或下載", "以系統為主，但員工會因分析需求偶爾匯出至Excel", "資料經常被匯出至多個員工設備中進行處理與追蹤", "資料存放在分散的雲端空間與設備中，難以追蹤流向"], p: [0, 5, 10, 15] },
@@ -217,7 +103,7 @@
                 { q: "若您計畫轉職到新公司，您通常會如何處理持有的客戶資料？", a: ["主動清理並銷毀所有在私人空間中留下的公司資料", "會清理主要資料，但可能留存一些關鍵資料作參考", "並不會主動清理，除非公司有明確要求或執行清查", "會全數保留，認為這些資料未來對我的職涯發展有幫助"], p: [0, 5, 10, 15] }
             ],
             "retail_boss": [
-                { q: "店內累積的會員個資與熟客名單，目前主要的存放與管理方式？", a: ["完全集中儲存於 POS 系統或官方資料庫，不隨意流出", "以系統為主，但店長或特定員工會額外匯出名單管理", "資料分散在系統、紙本筆記、通訊軟體群組等多個角落", "名單幾乎都在員工個人通訊設備中，總部無法完整掌握"], p: [0, 5, 10, 15] },
+                { q: "店內累積的會員個資與熟客名單，目前主要的存放與管理方式？", a: ["完全集中儲存於 POS 系統 or 官方資料庫，不隨意流出", "以系統為主，但店長或特定員工會額外匯出名單管理", "資料分散在系統、紙本筆記、通訊軟體群組等多個角落", "名單幾乎都在員工個人通訊設備中，總部無法完整掌握"], p: [0, 5, 10, 15] },
                 { q: "員工平時與熟客互動、通知新商品或促銷時，主要使用的管道？", a: ["僅能透過公司官方帳號或工具，嚴禁私下聯繫客戶", "主要用官方工具，但員工會經報備後用個人私訊", "多數員工習慣直接用個人 LINE 加客戶聯繫，公司難管控", "完全交由員工自行聯繫，聯繫紀錄完全不在公司掌控中"], p: [0, 5, 10, 15] },
                 { q: "門市 POS 系統或行政管理系統的帳號密碼管控方式？", a: ["每位人員有專屬帳號且權限依職級區分，操作有紀錄", "雖然有分帳號，但權限過大或各帳號間密碼常互通", "部分系統帳號由全店共用，所有人皆知道同一組帳密", "多數帳號為公用狀態且長期未更改密碼，外人亦可知"], p: [0, 5, 10, 15] },
                 { q: "店內資料（如庫存明細、會員手冊）被員工私下拍下或帶離門市？", a: ["從未發生過，且店內有嚴格禁止攝錄重要資訊的規範", "偶爾因作業需要而拍下，但並無明確的管理與刪除機制", "已知有員工會將店內內部資料存放在個人手機帶走", "資料隨意外傳的情況普遍，完全沒有針對帶離的控管"], p: [0, 5, 10, 15] },
@@ -229,7 +115,7 @@
                 { q: "若發生大規模會員資料遭盜取外流，公司是否有法務準備？", a: ["有完整的流程與法律顧問支持，能第一時間止損對應", "大致知道要如何處理，但缺乏完整的應變演練規劃", "目前缺乏處理機制，發生時只能依照當下情況處理", "完全沒有準備，對個資法責任與罰鍰等風險並不了解"], p: [0, 5, 10, 20] }
             ],
             "retail_staff": [
-                { q: "在門市日常作業中，您能接觸到的會員或客戶資料範圍為何？", a: ["僅限於結帳時必要接觸的極少部分內容（如僅手機號碼）", "大部分會員的基本資料皆可點閱，權限控管尚不嚴格", "幾乎可以看見完整的客戶購買力評估與詳細聯繫地址", "沒有權限限制，所有人的消費紀錄與聯絡全資皆可查"], p: [0, 5, 10, 15] },
+                { q: "在門市日常作業中，您能接觸到的會員或客戶資料範圍為何？", a: ["僅限於結帳時必要接觸的極少部分內容（如僅手機號碼）", "大部分會員的基本資料皆可點閱，權限控管尚不嚴格", "幾乎可以看見完整的醫療診斷紀錄與病患全資", "沒有權限限制，所有人的消費紀錄與聯絡全資皆可查"], p: [0, 5, 10, 15] },
                 { q: "為了經營熟客關係，您通常是否會使用個人 LINE 加客戶好友聯繫？", a: ["不會，這違反公司規定，僅透過官方帳號或工具聯繫", "偶爾會加少數熟客，但主要是為了服務溫度而非存檔", "經常直接使用私帳與客戶聯繫，因為這樣回覆最快最方便", "幾乎所有熟客都在我的個人通訊錄中，方便我隨時經營"], p: [0, 5, 10, 15] },
                 { q: "關於客戶的特殊需求或偏好，您通常會如何記錄保存？", a: ["僅記錄在公司的 POS 或 CRM 系統內，不另存私處", "主要存系統，但個人手機也會留存一份副本以防遺漏", "記在個人手機筆記、LINE 群組或私人的雲端檔案中", "分散存放在多個個人工具內，方便我在店外也能處理"], p: [0, 5, 10, 15] },
                 { q: "門市系統帳號密碼的使用習慣為何？", a: ["我有專屬個人的帳密，且絕對不會告知同事或借人登入", "有個人帳號，但為了方便偶爾會直接告知同事密碼代操作", "帳號是門市共用的，大家皆知同一組密碼且很少更改", "並不清楚是否有區分，大家都用同一個帳號進行結帳"], p: [0, 5, 10, 15] },
@@ -274,23 +160,59 @@
             container.innerHTML = html;
         }
 
-        function handleEmailSubmit(score) {
+        // [保險植入 2] 升級後的發信邏輯：先 EmailJS 給客戶，後 Formspree 備份
+        async function handleEmailSubmit(score) {
             const btn = document.getElementById('submit-email');
             const emailValue = document.getElementById('user-email').value;
+            const msg = document.getElementById('success-msg');
+            
             if(!emailValue.includes('@')) return alert('請輸入有效信箱');
-            btn.innerText = "發送中..."; btn.disabled = true;
-            fetch("https://formspree.io/f/xbdqpjye", {
-                method: "POST", headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: emailValue, score: score, industry: state.current.industry, role: state.current.role })
-            }).then(() => { btn.innerText = "已送出"; document.getElementById('success-msg').classList.remove('hidden'); });
+            
+            btn.innerText = "發送中..."; 
+            btn.disabled = true;
+
+            let lvl = score >= 120 ? "極高危險" : score >= 40 ? "中度警戒" : "低度風險";
+
+            // 準備發給 EmailJS 的參數
+            const templateParams = {
+                user_email: emailValue,
+                score: score,
+                rank: lvl
+            };
+
+            try {
+                // 第一步：寄信給客戶 (EmailJS)
+                await emailjs.send("service_2kl2ayr", "template_jsl6mbh", templateParams);
+
+                // 第二步：資料備份到 Formspree
+                await fetch("https://formspree.io/f/mqakvwdw", {
+                    method: "POST", 
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        email: emailValue, 
+                        score: score, 
+                        industry: state.current.industry, 
+                        role: state.current.role,
+                        risk_rank: lvl
+                    })
+                });
+
+                btn.innerText = "已成功送出"; 
+                msg.classList.remove('hidden');
+            } catch (error) {
+                console.error("發送失敗:", error);
+                alert("報告傳送暫時發生問題，請稍後再試。");
+                btn.innerText = "重新獲取報告";
+                btn.disabled = false;
+            }
         }
 
         function push(newData) { state.history.push(JSON.parse(JSON.stringify(state.current))); state.current = { ...state.current, ...newData }; render(); }
         function goBack() { if (state.history.length > 0) { state.current = state.history.pop(); render(); } }
-        function answer(p) { 
-            const nextScore = state.current.score + p; 
-            if (state.current.currentQ < 9) push({ currentQ: state.current.currentQ + 1, score: nextScore }); 
-            else push({ step: 'result', score: nextScore }); 
+        function answer(p) { 
+            const nextScore = state.current.score + p; 
+            if (state.current.currentQ < 9) push({ currentQ: state.current.currentQ + 1, score: nextScore }); 
+            else push({ step: 'result', score: nextScore }); 
         }
         function restart() { state = { history: [], current: { step: 'start', industry: '', role: '', currentQ: 0, score: 0 } }; render(); }
         window.onload = render;
