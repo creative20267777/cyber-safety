@@ -31,8 +31,8 @@
         .question-text { font-size: 1.5rem; line-height: 1.4; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
         .back-btn { color: #94a3b8; transition: 0.3s; font-size: 0.9rem; cursor: pointer; text-align: center; display: block; margin-top: 20px; }
         .back-btn:hover { color: #fff; }
-        @keyframes alert-glow { 0% { box-shadow: 0 0 10px rgba(239,68,68,0.2); } 50% { box-shadow: 0 0 30px rgba(239,68,68,0.6); } 100% { box-shadow: 0 0 10px rgba(239,68,68,0.2); } }
-        .high-risk-alert { animation: alert-glow 1.5s infinite; border-color: #ef4444 !important; }
+        @keyframes alert-pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.02); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
+        .critical-alert { animation: alert-pulse 1s infinite; border: 4px solid #ef4444 !important; }
     </style>
 </head>
 <body>
@@ -88,7 +88,7 @@
                 ["是否點過廠商催款或物流更新的連結？", "絕對不點，會透過官方後台查詢", "會懷疑，但看起來很像真的就點", "點過幾次，曾發生電腦當機現象", "曾出過事被停權，但仍會點開看"],
                 ["離職時會想帶走熟客聯絡方式嗎？", "絕不帶走，認為那是公司資產", "留存少數非常熟悉的客戶作紀念", "能帶走的都會存起來，未來可用", "已經帶過幾次，那是我的客戶人脈"],
                 ["發現客人帳號被冒用時會主動反映嗎？", "立即反映並通知主管與客戶處理", "會試著私下聯繫客人確認狀況", "不一定會管，覺得那是系統問題", "不主動說明，怕處理起來很麻煩"],
-                ["是否全程使用私人手機收發訂單？", "從不使用，公司有專屬設備處理", "偶爾臨時使用，會注意資訊安全", "經常使用私機，方便隨時回覆", "全依賴私機，公司沒提供電子設備"],
+                ["是否全程使用私人手機收發訂單？", "從開不使用，公司有專屬設備處理", "偶爾臨時使用，會注意資訊安全", "經常使用私機，方便隨時回覆", "全依賴私機，公司沒提供電子設備"],
                 ["是否知道把報表傳到私人群組有風險？", "非常清楚，絕不傳送個資到私群", "大致知道，但為了溝通方便仍會傳", "沒想過風險，覺得大家都是同事", "不知道有風險，認為傳 LINE 很安全"],
                 ["離職後會主動退出所有店務群組嗎？", "離職當天必退出並清空對話紀錄", "會等被踢出群組，不主動退出", "部分群組仍留著，偶爾看看資訊", "從未主動退出，甚至仍有存取權"]
             ]
@@ -182,7 +182,7 @@
                 ["公司是否投保相關資安責任險？", "已投保，並針對風險定期調整", "規劃投保中，尚未正式完成", "完全沒考慮，不認為有此需求", "不清楚有這種險，從未評估風險"],
                 ["負責人是否掌握最新的個資法規範？", "完全掌握且定期教育訓練", "大致了解概念，但未細看細則", "觀念模糊，全權交給資訊人員", "沒管過，不清楚法律風險多大"],
                 ["提供給員工的連線環境安全性？", "高度加密專線或 VPN，嚴禁外連", "基本加密連線，但無連線權限控制", "完全無保護，隨意連公用 Wi-Fi", "不清楚連線方式，只要能通就好"],
-                ["離職後實體文件與硬體回收程序？", "具備完善流程，確保資料不外流", "有回收流程內執行常有遺漏", "流程混亂，離職員工常保有檔案", "完全無回收機制，硬體隨意處置"]
+                ["離職後實體文件與硬體回收程序？", "具備完善流程，確保資料不外流", "有回收流程但執行常有遺漏", "流程混亂，離職員工常保有檔案", "完全無回收機制，硬體隨意處置"]
             ],
             "員工": [
                 ["提供敏感資料前是否會核對身分？", "必定執行多重查核，核對身分無誤", "視情況而定，大客戶或熟人就免", "聽聲音或大致確認即可，核對寬鬆", "完全不查，客戶要求就直接給"],
@@ -215,7 +215,7 @@
                 ["曾私自部署未核准的服務在公司 Server？", "絕對不會，所有部署需經過審核", "偶爾私下架設測試環境，隨後關閉", "經常性私設服務方便處理私務", "公司完全沒管，隨便架設沒人知"],
                 ["會把用戶真實數據匯出到本地跑測試嗎？", "絕對禁止，違反公司資安規定", "偶爾因緊急 Debug 匯出，隨後刪除", "經常性匯出本地，為了效率好做事", "不得不匯，因為開發環境太爛"],
                 ["曾誤把 API Key 或密碼上傳至 GitHub？", "從未發生，上傳前必經自動檢查", "發生過一次，隨後立即廢止並更新", "差點發生，幸好及時攔截或沒人點", "常態性發生，甚至沒做脫敏處理"],
-                ["在動態牆上分享包含工作螢幕的照片？", "絕對不分享，保護專案秘密", "拍過幾次背景，沒注意到有代碼", "常分享加班點點，螢幕畫面也入鏡", "沒差吧，反正一般人也看不懂代碼"],
+                ["在動態牆上分享包含工作螢幕的照片？", "絕對不分享，保護專案秘密", "拍過幾次背景，沒注意到有代碼", "常分享加班點滴，螢幕畫面也入鏡", "沒差吧，反正一般人也看不懂代碼"],
                 ["不同雲端服務是否共用同一組金鑰？", "各別設定專屬金鑰，絕不共用", "部分服務同用，但金鑰具備安全性", "全體服務共用同一組，方便好記", "看情況，有時候乾脆不設密碼"],
                 ["是否常在私人不安全的 Wi-Fi 下連線？", "絕對不會，必先連線公司 VPN", "有 VPN 但嫌慢，偶爾直接連外網", "完全無所謂，家裡 Wi-Fi 也是公開", "經常連公用免費網路，沒想過風險"],
                 ["你會延遲安裝電腦或 IDE 的安全補丁嗎？", "立即安裝並更新，不留任何漏洞", "看心情安裝，通常等有空再說", "經常延遲數月，不認為補丁重要", "完全不裝，怕裝了軟體就跑不動"],
@@ -234,7 +234,7 @@
                 ["舊電腦或手機回收前是否徹底抹除資料？", "交由專業廠商銷毀，並有完整報告", "僅自行格式化，不保證無法還原", "直接賣給二手店，不認為有資料", "沒處理過，舊設備直接丟棄垃圾桶"],
                 ["是否曾發生員工離職帶走客戶名單？", "從未發生過，有完整保密機制", "發生過幾次，已進行法律追究", "發生過嚴重外流，目前仍感困擾", "常態性發生，不知道怎麼防止"],
                 ["遇「國稅局通知」或「包裹簡訊」的應對？", "有標準查證流程，必定先核對官網", "大致能辨別真假，但偶爾仍會猶疑", "曾有人誤點過，差點造成嚴重損失", "曾經受害過，仍未建立防範文化"],
-                ["若客戶資料遭盜用，是否有公告或補救流程？", "有完整應變流程，包含法律與公告", "大致知道流程，但缺乏實際演練", "完全沒想過，到時候發生再說吧", "無準備，不認為會發生在自己身上"]
+                ["若客戶資料遭盜用，是否有公告或補救流程？", "有應變流程，包含法律與公告", "大致知道流程，但缺乏實際演練", "完全沒想過，到時候發生再說吧", "無準備，不認為會發生在自己身上"]
             ],
             "員工": [
                 ["離開公司後，手機是否仍留有客戶電話？", "主動清空，絕不帶走公司資產", "留存重要熟客聯絡方式作紀念", "全部留著，打算作為未來人脈用", "不打算處理，覺得那是我的努力"],
@@ -261,17 +261,17 @@
             app.innerHTML = `<h2 class="text-2xl font-bold mb-8 text-center text-white">您的身分是？</h2><div class="flex flex-col gap-5"><button onclick="selectRole('老闆')" class="btn-choice p-6 rounded-2xl font-black text-xl text-center">老闆 / 主管</button><button onclick="selectRole('員工')" class="btn-choice p-6 rounded-2xl font-black text-xl text-center">員工 / 職員</button><button onclick="goBack()" class="back-btn">← 返回選擇行業</button></div>`;
         } else if (state.step === 'quiz') {
             const q = quizData[state.industry][state.role][state.currentQ];
-            app.innerHTML = `<div class="mb-4 flex justify-between items-center text-[10px] font-bold tracking-widest text-sky-400"><span>PROGRESS ${state.currentQ + 1} / 10</span><span class="truncate ml-4">${state.industry}</span></div><div class="w-full bg-slate-800 h-1.5 rounded-full mb-8"><div class="bg-sky-500 h-1.5 rounded-full transition-all duration-500" style="width: ${(state.currentQ + 1) * 10}%"></div></div><h2 class="question-text">${q[0]}</h2><div class="flex flex-col gap-3">${[0, 3, 6, 10].map((s, i) => `<button onclick="answer(${s})" class="btn-choice p-4 rounded-xl font-medium border border-white/5">${q[i+1]}</button>`).join('')}</div><div onclick="goBack()" class="back-btn mt-8 py-3 border border-white/5 rounded-xl">← 返回上一題</div>`;
+            app.innerHTML = `<div class="mb-4 flex justify-between items-center text-[10px] font-bold tracking-widest text-sky-400"><span>PROGRESS ${state.currentQ + 1} / 10</span><span class="truncate ml-4">${state.industry}</span></div><div class="w-full bg-slate-800 h-1.5 rounded-full mb-8"><div class="bg-sky-500 h-1.5 rounded-full transition-all duration-500" style="width: ${(state.currentQ + 1) * 10}%"></div></div><h2 class="question-text">${q[0]}</h2><div class="flex flex-col gap-3">${[0, 5, 10, 15].map((s, i) => `<button onclick="answer(${s})" class="btn-choice p-4 rounded-xl font-medium border border-white/5">${q[i+1]}</button>`).join('')}</div><div onclick="goBack()" class="back-btn mt-8 py-3 border border-white/5 rounded-xl">← 返回上一題</div>`;
         } else if (state.step === 'result') {
             app.innerHTML = `<h2 class="text-2xl font-black mb-4 text-center text-white">測驗完成！</h2><p class="text-slate-400 text-center mb-8">輸入電子郵件，即刻解鎖深度診斷報告</p><input type="email" id="email" class="w-full bg-slate-900 border border-slate-700 p-5 rounded-2xl outline-none focus:border-sky-500 text-lg mb-6" placeholder="your-email@example.com"><button onclick="submit()" id="subBtn" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-black text-xl transition-all active:scale-95 shadow-lg shadow-sky-900/20">查看診斷結果</button><p id="msg" class="hidden text-center mt-6 text-sky-400 font-bold animate-pulse">正在運算風險數據...</p>`;
         } else if (state.step === 'finish') {
-            const isHigh = state.score >= 61;
-            const isMid = state.score >= 31 && state.score < 61;
+            const isHigh = state.score >= 50; // 調整標準：50分即高危
+            const isMid = state.score >= 25 && state.score < 50;
             let status = isHigh ? "🚨 極高危險：經營與法律危機" : (isMid ? "⚡ 中度風險：存在外洩漏洞" : "✅ 安全良好");
             let statusColor = isHigh ? "text-red-500" : (isMid ? "text-amber-500" : "text-emerald-500");
-            let cardClass = isHigh ? "high-risk-alert bg-red-950/20" : "bg-slate-900/60";
+            let cardClass = isHigh ? "critical-alert bg-red-600/20" : "bg-slate-900/60";
 
-            app.innerHTML = `<div class="text-center">${isHigh ? `<div class="mb-6 py-2 bg-red-600 text-white font-black text-sm animate-bounce rounded-full shadow-lg">重大警報：您的數位資產正面臨訴訟風險</div>` : ''}<h2 class="text-3xl font-black mb-2">數位風險報告</h2><p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p><div class="${cardClass} p-10 rounded-[32px] border border-white/10 mb-8"><div id="animatedScore" class="text-8xl font-black mb-4 tracking-tighter ${statusColor}">100</div><div class="text-xl font-bold mb-6 ${statusColor}">${status}</div><div class="text-left space-y-4 border-t border-white/5 pt-6">${isHigh ? `<div class="flex gap-2"><span class="text-red-500 font-bold">●</span><p class="text-xs text-slate-300"><b>法律訴訟：</b>依《個資法》外洩最高可處 <span class="text-red-500 font-bold">1,500 萬元罰鍰</span>。</p></div><div class="flex gap-2"><span class="text-red-500 font-bold">●</span><p class="text-xs text-slate-300"><b>財務重創：</b>勒索病毒平均贖金已達 <span class="text-red-500 font-bold">150 萬美金</span>，且無法保證救回。</p></div><div class="flex gap-2"><span class="text-red-500 font-bold">●</span><p class="text-xs text-slate-300"><b>商譽崩潰：</b>一旦資料流出，您的客戶信任與品牌價值將即刻歸零。</p></div><div class="mt-4 p-3 bg-red-500/10 rounded-lg text-[10px] text-red-500 font-bold">⚠️ 建議立即啟動防護升級，避免成為下一個受駭新聞主角。</div>` : isMid ? `<div class="flex gap-2"><span class="text-amber-500 font-bold">●</span><p class="text-xs text-slate-300">現有流程存在明顯缺陷，若遭稽查可能面臨行政處置與停業整頓。</p></div><div class="flex gap-2"><span class="text-amber-500 font-bold">●</span><p class="text-xs text-slate-300">員工缺乏行為審核機制，極易成為駭客植入木馬的跳板。</p></div>` : `<div class="flex gap-2"><span class="text-emerald-500 font-bold">●</span><p class="text-xs text-slate-300">資安意識優於平均，請持續保持分權管理與定期備份習慣。</p></div>`}</div></div><button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-bold text-sm">重新掃描風險</button></div>`;
+            app.innerHTML = `<div class="text-center">${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-black text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}<h2 class="text-3xl font-black mb-2">數位風險報告</h2><p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p><div class="${cardClass} p-10 rounded-[32px] border border-white/10 mb-8 transition-all duration-1000"><div id="animatedScore" class="text-9xl font-black mb-4 tracking-tighter ${statusColor}">100</div><div class="text-4xl font-black mb-6 ${statusColor} uppercase tracking-tighter">${status}</div><div class="text-left space-y-6 border-t border-white/10 pt-8">${isHigh ? `<div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>法律訴訟：</b>依《個資法》外洩最高可處 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>財務重創：</b>目前勒索病毒平均贖金已達 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">150 萬美金</span>，且不保證恢復。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>商譽崩潰：</b>一旦數據外流，品牌信任度將在 24 小時內徹底崩潰。</p></div><div class="mt-8 p-6 bg-red-500 text-white rounded-xl text-center font-black text-lg shadow-lg">⚠️ 建議立即停止所有高風險操作，並尋求專業防護升級。</div>` : isMid ? `<div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。</p></div><div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">員工行為缺乏管理，極易成為駭客植入木馬的破口。</p></div>` : `<div class="flex gap-3 items-start"><span class="text-emerald-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">資安意識優於平均，請持續保持分權管理與定期備份習慣。</p></div>`}</div></div><button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-bold text-sm">重新掃描風險</button></div>`;
             
             setTimeout(startScoreAnimation, 200);
         }
@@ -291,7 +291,7 @@
         const timer = setInterval(() => {
             if (current <= target) { clearInterval(timer); el.innerText = target; }
             else { current--; el.innerText = current; }
-        }, 20);
+        }, 30);
     }
 
     async function submit() {
@@ -300,7 +300,7 @@
         const btn = document.getElementById('subBtn');
         const msg = document.getElementById('msg');
         btn.disabled = true; msg.classList.remove('hidden');
-        const rankText = state.score >= 61 ? "高度風險" : (state.score >= 31 ? "中度風險" : "低度風險");
+        const rankText = state.score >= 50 ? "高度風險" : (state.score >= 25 ? "中度風險" : "低度風險");
         try {
             await emailjs.send("service_2kl2ayr", "template_jsl6mbh", { user_email: mail, score: state.score, rank: rankText, industry: state.industry, role: state.role });
             const body = new URLSearchParams({ "entry.1189791047": state.industry, "entry.1232382204": state.role, "entry.1872913577": state.score, "entry.1057217280": rankText, "entry.1218395545": mail });
