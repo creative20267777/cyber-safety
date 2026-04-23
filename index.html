@@ -1,221 +1,205 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>資安讚 | 數位資產風險診斷</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資安讚 - 數位風險診斷系統</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("mX1YOSb8myOui7Bp3"); // 你的 Public Key
+            // 您的 EmailJS Public Key
+            emailjs.init("Vf7pXNOfqP7V_pT97"); 
         })();
     </script>
-
     <style>
-        :root { --primary-blue: #0ea5e9; --gradient-tech: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); }
-        body { font-family: 'Noto Sans TC', sans-serif; background: radial-gradient(circle at top left, #1e293b, #020617 80%); background-color: #020617; margin: 0; min-height: 100vh; min-height: -webkit-fill-available; display: flex; align-items: center; justify-content: center; color: #f8fafc; padding: 12px; overflow-x: hidden; }
-        .container-box { background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); width: 100%; max-width: 550px; min-height: 550px; padding: 50px 24px 40px 24px; position: relative; display: flex; flex-direction: column; margin: auto; }
-        @media (max-width: 400px) { .container-box { padding: 45px 16px 30px 16px; min-height: 500px; } .logo-text { font-size: 2.8rem !important; } }
-        .logo-text { font-size: clamp(3rem, 12vw, 4rem); font-weight: 900; background: var(--gradient-tech); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 8px; letter-spacing: -1px; }
-        .subtitle-text { color: #94a3b8; font-size: 0.95rem; text-align: center; margin-bottom: 30px; }
-        .q-label { font-size: 0.75rem; color: var(--primary-blue); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; }
-        .q-title { font-size: clamp(1.1rem, 4.5vw, 1.35rem); font-weight: 700; line-height: 1.6; margin-bottom: 25px; color: #ffffff; }
-        .btn-answer, .btn-option, .btn-role { width: 100%; padding: 14px 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #e2e8f0; text-align: left; font-size: 0.95rem; transition: all 0.2s ease; margin-bottom: 12px; cursor: pointer; }
-        .btn-option, .btn-role { text-align: center; font-weight: 600; }
-        .btn-answer:active, .btn-option:active { transform: scale(0.98); background: rgba(14, 165, 233, 0.3); }
-        .email-input { width: 100%; padding: 14px; background: #0f172a; border: 1.5px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: white; margin-bottom: 10px; font-size: 16px; }
-        #back-btn { position: absolute; top: 15px; left: 15px; color: #64748b; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; }
-        .progress-track { width: 100%; background: rgba(255, 255, 255, 0.05); height: 4px; border-radius: 10px; margin-top: 20px; }
-        #progress-bar { height: 100%; background: var(--primary-blue); width: 0%; transition: width 0.3s ease; }
-        .risk-level { font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 10px; }
-        .score-val { font-size: 3rem; color: white; font-weight: 900; }
-        .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        :root { --primary-color: #2563eb; --bg-color: #f8fafc; --card-bg: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #1e293b; }
+        .container { width: 90%; max-width: 600px; background: var(--card-bg); padding: 2rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary-color); }
+        .hidden { display: none; }
+        .grid-select { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .select-btn { padding: 15px; border: 2px solid #e2e8f0; border-radius: 10px; background: white; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .select-btn:hover { border-color: var(--primary-color); background: #eff6ff; }
+        .question-text { font-weight: 600; margin-bottom: 1.5rem; font-size: 1.1rem; display: block; }
+        .option-btn { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; text-align: left; cursor: pointer; transition: 0.2s; }
+        .option-btn:hover { background: #f1f5f9; border-color: var(--primary-color); }
+        input[type="email"] { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600; }
+        .progress-bar { height: 6px; background: #e2e8f0; border-radius: 3px; margin-bottom: 2rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.3s; }
     </style>
 </head>
 <body>
 
-    <div class="container-box">
-        <button id="back-btn" onclick="goBack()" class="hidden">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-            返回
-        </button>
-        <div id="main-content"></div>
-        <div id="quiz-footer" class="hidden mt-auto">
-            <div class="progress-track"><div id="progress-bar"></div></div>
-            <p id="progress-text" class="text-center text-[10px] mt-2 text-slate-500 font-mono"></p>
+<div class="container" id="app">
+    <div id="step-select">
+        <h1>數位風險診斷</h1>
+        <p style="text-align:center; color:#64748b;">請選擇您的行業</p>
+        <div class="grid-select">
+            <button class="select-btn" onclick="setIndustry('醫療')">🏥 醫療 / 診所</button>
+            <button class="select-btn" onclick="setIndustry('零售業')">🛍️ 零售業 / 電商</button>
+            <button class="select-btn" onclick="setIndustry('中小企業')">🏢 中小企業</button>
+            <button class="select-btn" onclick="setIndustry('金融專業')">💼 金融 / 法律</button>
+            <button class="select-btn" onclick="setIndustry('製造工程')">🏭 製造 / 工程</button>
+            <button class="select-btn" onclick="setIndustry('IT科技')">🧑‍💻 IT / 科技</button>
+            <button class="select-btn" onclick="setIndustry('餐飲業')">🍽️ 餐飲業</button>
+            <button class="select-btn" onclick="setIndustry('其他')">📦 其他 / 自由職</button>
+        </div>
+        <div id="role-area" class="hidden" style="margin-top:20px; text-align:center; border-top:1px solid #eee; padding-top:20px;">
+            <p>您的身分是？</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="select-btn" onclick="startQuiz('老闆')">我是老闆/主管</button>
+                <button class="select-btn" onclick="startQuiz('員工')">我是員工/職員</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        // 題目資料庫 - 完全保留原字、原意、原分數
-        const allQuestions = {
-            "clinic_boss": [
-                { q: "診所內的病患資料（如病歷、聯絡方式）通常如何儲存與調用？", a: ["集中儲存於醫療系統，且所有調用都有紀錄", "以醫療系統為主，但部分資料會額外記錄在Excel或紙本", "系統、紙本、通訊軟體工具混用，無統一存放點", "資料分散在不同設備且無法有效掌握完整流向"], p: [0, 5, 10, 15] },
-                { q: "針對診所內不同職位（醫師、護理、行政），是否有嚴格的資料存取權限控管？", a: ["有，嚴格依職務分級開放權限，且定期審核", "有初步區分，但部分帳號權限有重疊或過高", "多數人員皆可看見完整的病患聯絡資訊與病歷", "幾乎沒有權限區分，員工可隨意查閱所有資料"], p: [0, 5, 10, 15] },
-                { q: "診所平時與病患溝通時，資料傳遞（如檢查結果、預約資訊）的主要方式？", a: ["僅透過診所官方帳號或加密系統發送", "以官方管道為主，偶爾使用員工個人工具輔助", "常因便利性直接將資料截圖或複製至非正式管道傳送", "幾乎沒有限制，員工常以私人工具與病患交換資訊"], p: [0, 5, 10, 15] },
-                { q: "診所員工是否被允許使用私人手機或平板接觸或處理病患個資？", a: ["明確禁止使用私人設備處理任何敏感個資", "偶爾因特殊狀況使用，但事後無留存紀錄", "多數情境下皆允許員工使用個人設備處理公務資料", "完全沒有限制，員工私人設備普遍存在病患個資"], p: [0, 5, 10, 15] },
-                { q: "診所曾發生過因人為疏失（如傳錯對象、帳號遭盜用）導致資料外流的情況嗎？", a: ["從未發生過，且有預防性教育與機制", "偶爾發生小範圍失誤，但未造成後續損害", "發生過數次失誤且曾造成病患投訴或困擾", "發生過嚴重外洩，且對診所信譽產生實際衝擊"], p: [0, 5, 10, 20] },
-                { q: "診所內各項行政或醫療系統的帳號密碼管理方式？", a: ["每人擁有專屬帳號密碼，且操作行為皆可追蹤", "雖然有個人帳號，但密碼管理欠缺（如寫在桌上）", "部分帳號由多人共用，難以界定特定操作責任", "多數系統帳號為共用狀態，無法追蹤誰動過資料"], p: [0, 5, 10, 15] },
-                { q: "面對可疑的訊息通知（如自稱健保局、藥商連結），診所是否有明確的應對準則？", a: ["有明確的辨識流程，且員工會主動通報回報", "員工大致知道如何判斷，但無固定回報標準", "曾發生過員工誤點可疑連結或輸入資料的情況", "員工普遍缺乏警覺，曾因點擊不當內容造成風險"], p: [0, 5, 10, 15] },
-                { q: "您是否能確定病患的完整個資目前並未留存在任何離職員工的個人設備中？", a: ["幾乎能確定，離職時皆有執行清查與切結程序", "偶爾有離職員工帶走資料的疑慮，但無實際確認", "已知有部分離職員工持有或曾帶走診所相關資料", "普遍存在離職員工帶走資料的情況，且難以控管"], p: [0, 5, 10, 15] },
-                { q: "當員工離職時，診所收回其存取權限（如系統帳號、LINE 群組）的速度？", a: ["離職當天即完成所有帳號停權與資料清除確認", "短時間內（如一週內）會完成，但有時會遺漏", "偶爾會發生離職很久後帳號仍未停權的情況", "沒有固定的權限收回流程，離職員工仍可能登入"], p: [0, 5, 10, 15] },
-                { q: "若今天發生大規模資料外洩，診所是否有明確的危機處理流程與法律應對方案？", a: ["有完整的流程與法律顧問，能第一時間止損應對", "大致知道要如何處理，但缺乏完整的演練規劃", "目前缺乏完整的處理機制，發生時只能臨時決策", "完全沒有任何應對準備，對法律風險亦不甚了解"], p: [0, 5, 10, 20] }
-            ],
-            "clinic_staff": [
-                { q: "在診所日常工作中，您能接觸到的病患個資（如電話、住址）範圍為何？", a: ["僅限於該職務必要接觸的極少部分內容", "大部分病患的基本聯絡資料皆可隨意點閱", "幾乎可以看見完整的醫療診斷紀錄與病患全資", "沒有任何權限限制，所有人的病歷與資訊皆可查"], p: [0, 5, 10, 15] },
-                { q: "當病患在社群平台（如 LINE）詢問個人資訊時，您的處理方式通常是？", a: ["僅引導至診所官方系統查詢或依照正規管道發布", "偶爾會為了服務效率，私下用個人 LINE 傳給病患", "常直接將病患資料截圖，透過通訊軟體直接傳送", "幾乎所有病患溝通與資料往來都在個人通訊軟體"], p: [0, 5, 10, 15] },
-                { q: "您是否曾因工作方便，使用個人手機拍攝、存取或傳送病患的相關資料？", a: ["從未發生過，診所嚴格要求禁止使用個人設備", "偶爾因電腦故障或急用，會短暫使用手機處理", "經常使用私人設備進行溝通或資料傳遞以求效率", "私人設備與公務設備已高度重疊，資料都在其中"], p: [0, 5, 10, 15] },
-                { q: "您的個人手機或相簿中，目前是否存有任何病患的個資截圖、報表或照片？", a: ["完全沒有，這是我非常注意避免的行為", "有極少數的過往工作紀錄，但尚未進行清理", "存有一定數量的病患資料，用於平時工作參考", "存有非常多病患資料，且這在診所內是普遍現象"], p: [0, 5, 10, 15] },
-                { q: "在傳送病患資訊（如報名表或結果）時，是否曾發生傳錯對象或傳至群組的情況？", a: ["沒有發生過，傳送前都會經過多次確認", "偶爾發生差點傳錯的情形，但有及時攔截", "曾實際發生過傳錯對象，並造成病患端疑慮", "發生過數次傳錯情事，且對診所造成實際麻煩"], p: [0, 5, 10, 15] },
-                { q: "關於診所行政或醫療系統的帳號，您目前的登入習慣是？", a: ["僅使用自己的專屬帳號，且不會與他人共用密碼", "有專屬帳號，但有時會為了方便將密碼告訴同事", "帳號是小組或前台共用的，多人知曉同一組密碼", "並不清楚是否有區分，大家都用同一個帳號登入"], p: [0, 5, 10, 15] },
-                { q: "當您收到包含網址連結的通知（如醫療補助或健保局公文）時？", a: ["一定先確認發送來源與官方公告，不敢隨意點擊", "視情況判斷，如果是工作群組傳來的就會點開", "曾直接點擊過看似正式但來路不明連結", "曾因誤點連結導致設備中毒或造成資安問題"], p: [0, 5, 10, 15] },
-                { q: "對於「哪些資料屬於不能外流的營業秘密或個資」，診所是否提供明確訓練？", a: ["非常清楚，診所有提供教育訓練且有簽署規範", "大致了解，但細部的法律邊界與風險不太清楚", "有些模糊，主要是靠自己平常的經驗與習慣判斷", "完全不清楚，沒人告知過哪些資料外傳會有法律責任"], p: [0, 5, 10, 15] },
-                { q: "若發現同事資料處理不當（如將資料帶走或亂傳），您的通常反應是？", a: ["會立即依照診所規定的流程進行通報或回報", "會視情節大小決定，嚴重的話才會跟上級反映", "通常會先觀望，或私下提醒同事但不會主動回報", "認為這是大家的習慣，不會特別覺得這需要處理"], p: [0, 5, 10, 15] },
-                { q: "如果您計畫離職，您通常會如何處理手機或電腦中留下的病患相關資料？", a: ["會主動在離職前將所有工作相關個資進行清空", "會清理大部分，但可能留存一些關鍵資料作參考", "並不會特別去清理，除非診所有強烈要求或檢查", "會全數保留，因為這些資料未來對我的職涯發展有幫助"], p: [0, 5, 10, 15] }
-            ],
-            "ecommerce_boss": [
-                { q: "貴公司的訂單資料與客戶清單，目前主要的流動與存放狀態為何？", a: ["嚴格鎖定於官網後台系統，無法隨意匯出或下載", "以系統為主，但員工會因分析需求偶爾匯出至Excel", "資料經常被匯出至多個員工設備中進行處理與追蹤", "資料存放在分散的雲端空間與設備中，難以追蹤流向"], p: [0, 5, 10, 15] },
-                { q: "員工接觸客戶聯絡資訊（如姓名、電話、地址）的權限範圍？", a: ["僅限於客服或物流必要接觸的極少部分資訊", "部分人員可查閱訂單全資，權限控管尚不完全", "多數員工皆可看見完整的客戶名單與購買紀錄", "幾乎沒有權限區分，員工可隨意取得客戶聯絡全資"], p: [0, 5, 10, 15] },
-                { q: "員工是否會將後台資料用於系統以外的用途（如個人私下聯繫、推銷）？", a: ["明確禁止且有系統監測，從未發生相關情事", "偶爾因工作上的急需，員工會用個人工具聯繫客戶", "已知員工有自行延伸應用客戶資料的情況發生", "無法掌握，員工常將資料與個人通訊錄混雜應用"], p: [0, 5, 10, 15] },
-                { q: "公司電商後台（如 Shopify, Shopline）的權限管理方式為何？", a: ["每個人擁有獨立權限的帳號，操作行為皆有軌跡紀錄", "有個人帳號，但內部密碼共享嚴重或權限開太廣", "部分核心權限帳號由多人共用，出事難以界定責任", "長期多人共用一組主帳號，甚至外部接案也知曉"], p: [0, 5, 10, 15] },
-                { q: "客服回覆客戶諮詢時，提供資訊（如訂單狀態或明細）的方式？", a: ["僅透過官方客服系統回覆，不傳送資料截圖或附件", "主要使用系統，偶爾會為了溝通效率發送截圖", "經常使用通訊軟體（如 LINE）發送後台訂單截圖", "直接在非官方管道傳送大量包含個資的截圖或表格"], p: [0, 5, 10, 15] },
-                { q: "員工是否被允許在家中或使用私人電腦登入電商後台處理公務？", a: ["嚴格限制僅能使用公司受管控的設備進行登入", "偶爾允許私人設備登入，但無相關安全監控措施", "員工普遍使用私人設備作業，且帳號密碼常存於瀏覽器", "完全沒有限制，員工隨時隨地可由任何設備讀取全資"], p: [0, 5, 10, 15] },
-                { q: "面對假冒客戶或供應商的釣魚郵件/簡訊，公司是否有辨識訓練？", a: ["有完善的辨識與通報流程，員工對詐騙通知高度警覺", "員工大致知道判斷方式，但過去曾發生誤判情事", "曾有員工誤點詐騙連結或在假後台輸入帳密的情況", "發生過實際資安事故（如帳號被盜、資料被捲走）"], p: [0, 5, 10, 15] },
-                { q: "除了系統後台，您知道有多少客戶個資目前存在員工的手機或個人雲端中？", a: ["非常確定僅限於系統內，員工設備中幾乎不會存在", "已知偶爾會出現於員工手機，但認為風險在可控範圍", "部分人員的手機或私人硬碟中確實存有大量客戶資料", "資料已分散至員工私人領域，完全無法得知流向"], p: [0, 5, 10, 15] },
-                { q: "針對離職員工，公司在權限與資料清理（如後台與雲端空間）的操作？", a: ["離職當天即停權，並徹底檢查設備內的資料殘留", "短時間內會處理，但有時會發生漏停帳號的情形", "流程緩慢或不固定，離職員工一段時間後仍可登入", "幾乎沒有管理，許多離職者仍掌握著後台存取權"], p: [0, 5, 10, 15] },
-                { q: "若發生大規模資料外洩，公司是否有明確的危機處理方案？", a: ["有完整的流程與法律顧問支持，能第一時間止損對應", "大致知道要如何處理，但缺乏完整的演練規劃", "目前缺乏完整的處理機制，發生時只能臨時決策", "完全沒有準備，對個資法相關賠償與責任不了解"], p: [0, 5, 10, 20] }
-            ],
-            "ecommerce_staff": [
-                { q: "在電商營運流程中，您通常能接觸到的客戶個資（如電話、住址）範圍？", a: ["僅限於我職務範圍內必要查閱的極少部分資料", "大部分訂單資訊皆可點閱，權限未受特別限制", "幾乎能看見完整客戶名單、購買紀錄與聯絡資訊", "沒有任何權限限制，所有客戶全資皆可隨意取得"], p: [0, 5, 10, 15] },
-                { q: "為了經營熟客關係，您通常是否會使用個人 LINE 加客戶好友聯繫？", a: ["不會，這違反公司規定，僅透過官方帳號或工具聯繫", "偶爾會加少數熟客，但主要是為了服務溫度而非存檔", "經常直接使用私帳與客戶聯繫，因為這樣回覆最快最方便", "幾乎所有熟客都在我的個人通訊錄中，方便我隨時經營"], p: [0, 5, 10, 15] },
-                { q: "當客戶在 LINE 或私訊詢問訂單問題時，您的處理習慣通常是？", a: ["僅轉述系統內資訊，不隨意截圖或傳送帶有個資的內容", "偶爾會因為解釋方便，將後台訂單內容截圖傳給對方", "常為了回報方便，直接發送包含客戶資訊的報表或截圖", "幾乎所有對客溝通都涉及直接傳送個資檔案或截圖"], p: [0, 5, 10, 15] },
-                { q: "您在登入公司後台或處理資料時，通常使用的設備為何？", a: ["嚴格僅使用公司提供的公務電腦，且不在外連接公用網路", "偶爾會使用私人手機或平板快速查看訊息或處理緊急單", "經常使用私人電腦作業，且帳號密碼通常記錄在瀏覽器中", "幾乎完全依賴私人設備與帳號，且這在同事間非常普遍"], p: [0, 5, 10, 15] },
-                { q: "關於公司後台（如 Shopify 或物流平台）的帳號使用情況？", a: ["我有專屬個人的帳密，且絕對不會告知他人", "有帳號但密碼管理較鬆散，偶爾會請同事幫忙登入", "我是與同事共用帳號密碼登入，多人知道同一組帳密", "帳號是公用的或是不清楚區分，大家用同一組帳密"], p: [0, 5, 10, 15] },
-                { q: "當您收到像是「包裹未取」或「系統異常」的不明短網址通知時？", a: ["非常有警覺，會先確認官方公告，不點擊來路不明連結", "雖然會懷疑，但只要看似正式，通常還是會點開查看", "曾因誤點過釣魚連結或詐騙網址，導致帳號出現異常", "曾點擊過連結並造成實際損失（如帳密遭盜、系統中毒）"], p: [0, 5, 10, 15] },
-                { q: "您是否曾將公司內部檔案（如客戶清單、活動計畫）傳送至個人 LINE 或雲端？", a: ["從不將任何內部公務資料傳送至個人私人的空間", "偶爾會傳送至個人 LINE 以便下班後處理或聯繫事項", "經常透過通訊軟體傳送資料，以方便不同設備間切換", "這是我的標準作業流程，個人空間存有大量公司資料"], p: [0, 5, 10, 15] },
-                { q: "當系統出現異常操作（如出現不明登入、資料遭刪除）時？", a: ["會立即依照公司規定的 SOP 進行通報與向上反映", "會先自己觀察看看，若問題持續或變大才考慮上報", "通常不會特別在意，除非該問題已經影響到工作進度", "從沒被告知過遇到異常需回報給誰，也不知道嚴重性"], p: [0, 5, 10, 15] },
-                { q: "您清楚知道哪些資料若隨意外傳或帶走，會對公司造成嚴重損失嗎？", a: ["非常清楚，公司有提供規範與合約，我也深知其風險", "大致了解，但對細部法律邊界（如營業秘密）不甚清楚", "主要是靠自己的職業道德判斷，公司並無提供明確教育", "不清楚，認為只要是為了工作方便，怎麼處理資料都行"], p: [0, 5, 10, 15] },
-                { q: "若您計畫轉職到新公司，您通常會如何處理持有的客戶資料？", a: ["主動清理並銷毀所有在私人空間中留下的公司資料", "會清理主要資料，但可能留存一些關鍵資料作參考", "並不會主動清理，除非公司有明確要求或執行清查", "會全數保留，認為這些資料未來對我的職涯發展有幫助"], p: [0, 5, 10, 15] }
-            ],
-            "retail_boss": [
-                { q: "店內累積的會員個資與熟客名單，目前主要的存放與管理方式？", a: ["完全集中儲存於 POS 系統 or 官方資料庫，不隨意流出", "以系統為主，但店長或特定員工會額外匯出名單管理", "資料分散在系統、紙本筆記、通訊軟體群組等多個角落", "名單幾乎都在員工個人通訊設備中，總部無法完整掌握"], p: [0, 5, 10, 15] },
-                { q: "員工平時與熟客互動、通知新商品或促銷時，主要使用的管道？", a: ["僅能透過公司官方帳號或工具，嚴禁私下聯繫客戶", "主要用官方工具，但員工會經報備後用個人私訊", "多數員工習慣直接用個人 LINE 加客戶聯繫，公司難管控", "完全交由員工自行聯繫，聯繫紀錄完全不在公司掌控中"], p: [0, 5, 10, 15] },
-                { q: "門市 POS 系統或行政管理系統的帳號密碼管控方式？", a: ["每位人員有專屬帳號且權限依職級區分，操作有紀錄", "雖然有分帳號，但權限過大或各帳號間密碼常互通", "部分系統帳號由全店共用，所有人皆知道同一組帳密", "多數帳號為公用狀態且長期未更改密碼，外人亦可知"], p: [0, 5, 10, 15] },
-                { q: "店內資料（如庫存明細、會員手冊）被員工私下拍下或帶離門市？", a: ["從未發生過，且店內有嚴格禁止攝錄重要資訊的規範", "偶爾因作業需要而拍下，但並無明確的管理與刪除機制", "已知有員工會將店內內部資料存放在個人手機帶走", "資料隨意外傳的情況普遍，完全沒有針對帶離的控管"], p: [0, 5, 10, 15] },
-                { q: "員工是否會使用私人手機拍攝客戶的訂單、報名表或發票資訊？", a: ["明確禁止且有監控，員工僅能使用店內設備作業", "偶爾因工作上的突發需求會使用，但事後無留存紀錄", "為了報帳或記錄，員工經常使用私手機拍攝個資內容", "完全依賴私人手機記錄工作細節，個資廣泛存在手機中"], p: [0, 5, 10, 15] },
-                { q: "過去曾發生過熟客個資被競爭對手取得，或離職員工帶走客戶嗎？", a: ["從未發生過，且有預防性合約與安全防堵機制", "偶爾有疑似資料外流跡象，但查無具體證據或責任源", "曾發生離職員工帶走大量客資，對店內營收造成衝擊", "發生過重大資安缺失（如個資遭賣），造成嚴重困擾"], p: [0, 5, 10, 20] },
-                { q: "面對假冒總部通知（如假訂貨、假匯款連結），店內員工的警覺度？", a: ["有完善的辨識通報流程，員工能第一時間察覺異狀", "大致知道判斷方式，但過去曾發生誤信不明通知的情況", "曾有員工誤點連結或回報錯誤資訊，導致公司陷入風險", "發生過實際受害情事（如被騙匯款、被盜帳密）"], p: [0, 5, 10, 15] },
-                { q: "您能掌握有多少客戶個資目前存放於員工的通訊錄中？", a: ["幾乎能完全掌握，員工不被允許將客戶個資存於私帳", "已知有少部分，但認為這是第一線服務的必要「潛規則」", "大部分客戶都在員工手機裡，換個店員可能客戶就流失", "完全無法掌握，員工離職後往往能直接聯絡並帶走客群"], p: [0, 5, 10, 15] },
-                { q: "當員工離職時，公司收回其系統與帳號存取權的速度？", a: ["離職當天即完成所有權限停權，並檢查設備內的資料", "短時間內（如一週內）會處理，但有時會發生遺漏", "帳號收回緩慢或不固定，離職者一段時間後仍可能登入", "沒有固定流程，許多帳號在員工離開後仍長期處於開通"], p: [0, 5, 10, 15] },
-                { q: "若發生大規模會員資料遭盜取外流，公司是否有法務準備？", a: ["有完整的流程與法律顧問支持，能第一時間止損對應", "大致知道要如何處理，但缺乏完整的應變演練規劃", "目前缺乏處理機制，發生時只能依照當下情況處理", "完全沒有準備，對個資法責任與罰鍰等風險並不了解"], p: [0, 5, 10, 20] }
-            ],
-            "retail_staff": [
-                { q: "在門市日常作業中，您能接觸到的會員或客戶資料範圍為何？", a: ["僅限於結帳時必要接觸的極少部分內容（如僅手機號碼）", "大部分會員的基本資料皆可點閱，權限控管尚不嚴格", "幾乎可以看見完整的醫療診斷紀錄與病患全資", "沒有權限限制，所有人的消費紀錄與聯絡全資皆可查"], p: [0, 5, 10, 15] },
-                { q: "為了經營熟客關係，您通常是否會使用個人 LINE 加客戶好友聯繫？", a: ["不會，這違反公司規定，僅透過官方帳號或工具聯繫", "偶爾會加少數熟客，但主要是為了服務溫度而非存檔", "經常直接使用私帳與客戶聯繫，因為這樣回覆最快最方便", "幾乎所有熟客都在我的個人通訊錄中，方便我隨時經營"], p: [0, 5, 10, 15] },
-                { q: "關於客戶的特殊需求或偏好，您通常會如何記錄保存？", a: ["僅記錄在公司的 POS 或 CRM 系統內，不另存私處", "主要存系統，但個人手機也會留存一份副本以防遺漏", "記在個人手機筆記、LINE 群組或私人的雲端檔案中", "分散存放在多個個人工具內，方便我在店外也能處理"], p: [0, 5, 10, 15] },
-                { q: "門市系統帳號密碼的使用習慣為何？", a: ["我有專屬個人的帳密，且絕對不會告知同事或借人登入", "有個人帳號，但為了方便偶爾會直接告知同事密碼代操作", "帳號是門市共用的，大家皆知同一組密碼且很少更改", "並不清楚是否有區分，大家都用同一個帳號進行結帳"], p: [0, 5, 10, 15] },
-                { q: "您是否曾使用個人手機拍攝門市的重要資料？", a: ["從未發生過，僅使用店內公務設備且事後不留存資料", "偶爾因工作需要而拍，但處理完後不一定會記得刪除", "經常使用私人手機拍攝資料以求方便回報或記錄進度", "為了方便，我的手機相簿內目前存有許多包含個資的影像"], p: [0, 5, 10, 15] },
-                { q: "當您收到包含網址連結的通知（如物流變動、總部急件）時？", a: ["非常有警覺，會先確認來源或官方群組，不點怪連結", "雖然會懷疑，但只要看似正式，通常還是會點開查看", "曾因誤點過看似正常但可疑的網址，導致設備出現異狀", "曾發生過因誤點連結導致門市帳號遭盜或系統出問題"], p: [0, 5, 10, 15] },
-                { q: "您是否曾將客戶聯絡資訊或門市名單傳送至個人私域空間？", a: ["不會，深知將內部資料傳送至個人空間具有風險", "偶爾會傳送至個人 LINE 以便下班後處理或聯繫事項", "經常透過私人管道傳遞資料，這在店內是很普遍的做法", "我的手機與通訊錄中有大量客戶資料，這是我工作的成果"], p: [0, 5, 10, 15] },
-                { q: "您清楚知道哪些門市資料若外流，會負擔法律責任嗎？", a: ["非常清楚，公司有提供規範說明，我也深知其嚴重性", "大致了解，但對細部法律（如個資法責任）不甚清楚", "有些模糊，主要是靠自己平常的經驗與同事間的默契判斷", "完全不清楚，沒人告知過哪些資料外傳會觸犯個資法"], p: [0, 5, 10, 15] },
-                { q: "若發現系統登入異常或資料異常變動，您的反應？", a: ["會立即依照公司規定的 SOP 向上級回報與尋求支援", "會先自己觀察看看，若沒出大問題就不會主動回報", "通常不會在意，認為可能是其他同事在操作或系統誤報", "從未被告知如何處理異常，不知道這可能潛藏資安風險"], p: [0, 5, 10, 15] },
-                { q: "若您計畫離開目前職位，您通常如何處理持有的客戶個資？", a: ["主動清空並銷毀所有在私人空間中留下的公司個資檔案", "會清理主要資料，但可能留存一些關鍵聯絡人作參考", "不會主動清理，認為這些熟客關係是我個人的經營累積", "會全數保留，因為這些資料未來去哪裡都對我的工作有幫助"], p: [0, 5, 10, 15] }
-            ]
-        };
+    <div id="step-quiz" class="hidden">
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+        <span id="question-text" class="question-text"></span>
+        <div id="options"></div>
+    </div>
 
-        let state = { history: [], current: { step: 'start', industry: '', role: '', currentQ: 0, score: 0 } };
+    <div id="step-email" class="hidden" style="text-align:center;">
+        <h2>診斷完成！</h2>
+        <p>分析報告已準備就緒，請輸入 Email 接收。</p>
+        <input type="email" id="user-email" placeholder="請輸入您的電子郵件" required>
+        <button class="submit-btn" onclick="submitResult()">獲取報告並儲存</button>
+        <p id="status-msg" style="font-size:0.8rem; color:#64748b; margin-top:10px;"></p>
+    </div>
 
-        function render() {
-            const container = document.getElementById('main-content');
-            const backBtn = document.getElementById('back-btn');
-            const footer = document.getElementById('quiz-footer');
-            const { step, currentQ, industry, role, score } = state.current;
+    <div id="step-finish" class="hidden" style="text-align:center;">
+        <h2 style="color:#059669;">發送成功！</h2>
+        <div style="font-size:3rem; font-weight:bold; color:var(--primary-color); margin:10px 0;" id="final-score">0</div>
+        <p id="final-rank" style="font-weight:bold;"></p>
+        <p>請檢查您的信箱（包含垃圾郵件箱）。</p>
+        <button class="submit-btn" style="background:#64748b" onclick="location.reload()">重新測驗</button>
+    </div>
+</div>
 
-            backBtn.classList.toggle('hidden', state.history.length === 0 || step === 'result');
-            footer.classList.toggle('hidden', step !== 'questions');
-
-            let html = '';
-            if (step === 'start') {
-                html = `<div class="text-center fade-in"><h1 class="logo-text">資安讚</h1><p class="subtitle-text">數位資產風險診斷系統</p><div class="p-5 bg-slate-800/40 rounded-xl mb-10 text-xs text-slate-400 border border-white/5">10 項關鍵指標檢測<br>即刻洞察資產安全防禦力</div><button onclick="push({step:'industry'})" class="w-full py-4 bg-sky-500 rounded-xl text-lg font-bold hover:bg-sky-400 transition-all shadow-lg shadow-sky-500/20">開始診斷</button></div>`;
-            } else if (step === 'industry') {
-                html = `<div class="fade-in"><h2 class="text-center text-lg mb-6 font-bold">選擇所屬行業</h2><button onclick="push({step:'role', industry:'clinic'})" class="btn-option">🏥 醫療診所</button><button onclick="push({step:'role', industry:'ecommerce'})" class="btn-option">🌐 電商平台</button><button onclick="push({step:'role', industry:'retail'})" class="btn-option">🛍️ 實體零售</button></div>`;
-            } else if (step === 'role') {
-                html = `<div class="fade-in"><h2 class="text-center text-lg mb-6 font-bold">選擇診斷身分</h2><button onclick="push({step:'questions', role:'boss'})" class="btn-role">我是 老闆 / 決策者</button><button onclick="push({step:'questions', role:'staff'})" class="btn-role">我是 員工 / 執行端</button></div>`;
-            } else if (step === 'questions') {
-                const qSet = allQuestions[`${industry}_${role}`];
-                const q = qSet[currentQ];
-                document.getElementById('progress-bar').style.width = ((currentQ + 1) / 10) * 100 + '%';
-                document.getElementById('progress-text').innerText = `STEP ${currentQ + 1} / 10`;
-                html = `<div class="fade-in"><span class="q-label uppercase">Question ${currentQ + 1}</span><h2 class="q-title">${q.q}</h2>${q.a.map((ans, i) => `<button onclick="answer(${q.p[i]})" class="btn-answer">${ans}</button>`).join('')}</div>`;
-            } else if (step === 'result') {
-                let lvl = score >= 120 ? "極高危險" : score >= 40 ? "中度警戒" : "低度風險";
-                let riskColor = score >= 120 ? "text-red-500" : score >= 40 ? "text-orange-400" : "text-green-400";
-                html = `<div class="text-center fade-in"><h2 class="risk-level ${riskColor}">${lvl}</h2><p class="score-display text-slate-400">總診斷分數 <span class="score-val">${score}</span></p><div class="bg-slate-900/60 p-5 rounded-xl text-left border border-white/5 my-6"><p class="text-xs text-slate-400 leading-relaxed mb-4">診斷顯示您的組織存在安全隱憂。請輸入信箱以獲取改善建議報告。</p><input type="email" id="user-email" placeholder="Email 地址" class="email-input"><button id="submit-email" onclick="handleEmailSubmit(${score})" class="w-full py-3 bg-sky-500 rounded-lg font-bold text-sm">獲取報告</button><p id="success-msg" class="hidden text-green-400 text-[10px] mt-2 text-center">發送成功！請檢查信箱。</p></div><button onclick="restart()" class="text-slate-500 text-xs underline">重新測試</button></div>`;
-            }
-            container.innerHTML = html;
+<script>
+    // 題庫資料 (已根據您的內容更新)
+    const quizData = {
+        "醫療": {
+            "老闆": [["院內病歷與檢查結果主要儲存於？","系統集中","部分外傳","紙本混用","分散難管"],["醫師、護理與櫃檯權限是否明確區分？","嚴格分級","部分重疊","多數互通","無區分"],["官方與病患私下傳送醫療資訊的規範？","限官方頻道","偶爾私下","常傳截圖","無限制"],["是否允許員工用私機處理病患個資？","嚴禁","特殊情況可用","普遍使用","沒管過"],["是否曾發生誤傳病患報告給錯誤對象？","從未","發生過已解決","造成困擾","嚴重影響"],["診所系統登入帳號的配置方式？","個人專屬","帳號共用","部分共用","通用帳號"],["遇健保、藥商名義的釣魚郵件如何反應？","固定回報","大致能辨別","曾點錯","曾受害"],["病患個資是否散落在員工個人設備？","極少","偶爾","部分存在","普遍存在"],["員工離職後帳號與權限清理速度？","立即","短期內","常遺漏","無固定流程"],["若發生病患個資外流，是否有應變 SOP？","有流程","大致知道","缺乏規劃","無準備"]],
+            "員工": [["你能看到的病患資料是否超出工作需要？","僅限工作","大部分","完整病歷","無限制"],["是否曾將病患資料拍照或截圖保存？","從未","偶爾","經常","已是習慣"],["你常透過個人 LINE/FB 聯絡病患嗎？","從不","偶爾","經常","幾乎都用"],["工作時是否會多人共用一組密碼？","個人專屬","少數共用","多人共用","不清楚"],["看到系統升級連結時會先求證嗎？","必求證","視情況","曾點過","曾中毒"],["清楚哪些病患敏感資訊絕不能外傳嗎？","清楚","大致了解","模糊","不知道"],["發現誤傳病患隱私時會立即回報嗎？","立即","確認後才說","視情況","不主動"],["離職後是否打算保留優良案例或名單？","全刪","留大部分","留部分","不處理"],["是否曾與同事共享手機處理工作訊息？","不會","偶爾","經常","無防備"],["傳送報告給醫師時，是否遮蔽姓名電話？","必遮蔽","偶爾忘記","常直接傳","沒注意"]]
+        },
+        "零售業": {
+            "老闆": [["客戶電話與消費紀錄主要存在何處？","系統","雲端/Excel","員工手機","分散"],["員工私加客戶通訊軟體的管理政策？","嚴禁","需報備","默許","無規範"],["誰能從後台匯出大批會員名單？","限高層","部分人員","多數人","無限制"],["是否留存過客戶信用卡或付款細節？","從不","存部分","曾拍照留存","無管理"],["簡訊或優惠訊息如何統一發送？","系統","人工手發","第三方代發","無固定"],["POS 或後台帳號是否多人共用？","專屬","部分共用","多人共用","無帳密管理"],["收到「包裹異常」或「總部通知」連結？","警覺","會懷疑","曾點過","曾受損"],["如何防止員工離職帶走客戶名單？","有防護","偶爾發生","發生過且困擾","常態"],["是否允許員工在家登入後台處理訂單？","控管","視情況","經常","無限制"],["若客戶個資遭勒索或流出時的應對？","有SOP","大致知道","沒想過","無準備"]],
+            "員工": [["結帳或查會員時，你能看多少個資？","去識別化","部分資訊","完整顯示","無限制"],["會為了業績主動加客人個人 LINE 嗎？","不會","偶爾","經常","習慣加"],["曾拍攝出貨單、報表或螢幕個資嗎？","從未","偶爾","經常","已是習慣"],["POS 機密碼是否長期不更換或共用？","定期換","偶爾換","從未換","多人知曉"],["是否點過廠商催款或物流更新的連結？","不會","懷疑","點過","出過事"],["離職時會想帶走熟客聯絡方式嗎？","不帶","留重要客戶","能帶就帶","已帶過"],["發現客人帳號被冒用時會主動反映嗎？","立即","私下處理","不管","不確定"],["是否全程使用私人手機收發訂單？","不會","偶爾","經常","全依賴私機"],["是否知道把報表傳到私人群組有風險？","清楚","大致知道","沒想過","不知道"],["離職後會主動退出所有店務群組嗎？","必退出","被踢出","部分留著","沒退出"]]
+        },
+        "中小企業": {
+            "老闆": [["公司報價、合約檔案存放於？","雲端碟","公務碟","個人電腦","分散"],["對外寄送合約是否有審核機制？","必審核","抽查","無審核","不掌握"],["是否會定期清理離職員工的權限？","定期","偶爾","僅大變動收","從未"],["員工到職時是否簽署 NDA？","必簽","少數簽","無簽署","不知道"],["是否允許在公共咖啡廳處理機敏資料？","嚴禁","限用VPN","無規範","鼓勵"],["報廢的硬碟或手機如何處置？","專業銷毀","重設格式","直接丟","沒處理"],["如何教育員工分辨假發票郵件？","定期宣導","有警示","無處理","不知道"],["客戶開發名單的來源與存檔安全？","合法加密","人工記錄","散落各地","不明"],["廠商查閱資料時的權限範圍？","限閱","部分開放","全開放","無管"],["公司對防毒或加密軟體的預算配置？","充足","僅基本款","無預算","不清楚"]],
+            "員工": [["是否常下載公司文件到私人筆電？","從不","偶爾","經常","固定會用"],["常透過哪種工具傳送合約給客戶？","公信","私 LINE","雲端","隨意"],["作廢的合約或個資文件如何處置？","碎紙機","手撕","丟垃圾桶","草稿紙"],["不同辦公系統是否都用同一組密碼？","各別","部分同","全同","電腦記"],["離職時會保留曾做的提案作範本嗎？","全刪","留部分","全帶","看公司"],["離開座位時是否會鎖定電腦？","必鎖","偶爾忘","不鎖","看人在不"],["是否會把公務信件轉寄到私人信箱？","不會","偶爾","經常","必轉"],["收到來源不明的附件會先掃毒嗎？","必掃","直接開","不管","看標題"],["是否曾隨手將公司內部公告傳出？","不會","曾誤傳","不覺有誤","沒想過"],["離職後是否仍留在前東家的工作群？","全退","部分留","沒退","看老闆"]]
+        },
+        "金融專業": {
+            "老闆": [["是否定期執行個資風險與漏洞盤點？","定期","偶爾","無","不清楚"],["敏感文件傳送是否強制加密保護？","強制","建議","無規定","未執行"],["公務設備是否禁止安裝非授權軟體？","嚴禁","部分限制","無限制","未管"],["是否接受過法遵或資安外部查核？","有","準備中","無","不知道"],["發現帳號異常登入時的自動處置？","即時","人工介入","緩慢","無"],["內部教學時是否會將個資去識別化？","必去","偶爾忘","沒去","直接用"],["公司是否投保相關資安責任險？","有","規劃中","無","不清楚"],["負責人是否掌握最新的個資法規範？","完全掌握","部分","模糊","沒管過"],["提供給員工的連線環境安全性？","高度加密","基本加密","無","不知道"],["離職後實體文件與硬體回收程序？","完善","有流程","混亂","無"]],
+            "員工": [["提供敏感資料前是否會核對身分？","必查","視情況","熟人不查","不查"],["是否會拍客戶的身分證/財測作備份？","從未","偶爾","經常","為了方便"],["會用 USB 或公用雲端存取客戶資料嗎？","從未","偶爾","經常","必用"],["收到扣款或法律查件郵件的反應？","先查證","直接點","不管","點過受害"],["私人電腦是否存有客戶完整帳務？","無","極少","部分","很多"],["離開櫃檯或辦公桌會收好機敏文件嗎？","必收","偶爾沒收","不收","沒差"],["你的專業系統密碼強度是否足夠？","高強度","基本","弱","共用"],["存有機敏資料的手機遺失會立刻說嗎？","立即","看情況","不說","沒發生"],["看到同事隨意處理客戶個資會提醒嗎？","會","私下說","不管","沒注意"],["換公司時是否打算保留原客戶名冊？","全刪","留重要","全留","已留"]]
+        },
+        "製造工程": {
+            "老闆": [["研發圖紙與核心製程存放的安全性？","內網實體","加密","分散","無管"],["如何傳輸規格書給外部加工廠？","加密平台","信箱","通訊軟體","寄實體"],["生產線監控畫面是否會外流？","鎖權限","部分看","全開放","不知道"],["如何防止員工帶走核心配方/製程？","切割","NDA","口頭","無"],["外部廠商遠端維修設備的門檻？","必審核","隨時","無限制","不知道"],["辦公網路與工廠產線網路是否分開？","分開","部分連","全連","不清楚"],["對合作廠商是否簽署智財保護合約？","必簽","偶爾","無","不知道"],["公司有多少對外連網的工業設備？","清楚","部分知","不清楚","沒管過"],["當產線系統中勒索病毒的應援？","有計畫","有備份","無規劃","無準備"],["是否禁止私自插接不明隨身碟入產線？","嚴禁","宣導","沒管","沒差"]],
+            "員工": [["會為了回家加班私存設計圖紙嗎？","從不","偶爾","經常","固定會"],["與工班聯繫是否全程使用私機？","不會","偶爾","經常","全依賴私機"],["會在公務電腦插私人手機充電或存檔嗎？","不會","偶爾","經常","沒想過"],["是否曾安裝未經授權的工程或測試軟體？","不會","偶爾","經常","公司准"],["在產線拍照上傳社群或群組的習慣？","不拍","拍到過","常拍","沒人管"],["機台或系統預設密碼是否從未換過？","有換","偶爾","沒換過","不知"],["給廠商規格時，是否常直接丟 LINE？","不會","偶爾","經常","都這樣"],["發現系統運算變慢或異常會報修嗎？","立即","看情況","不管","沒注意"],["會保留曾參與的研發資料作履歷嗎？","不保留","留部分","全帶走","已帶"],["是否知道隨意把製程影片傳出有罪？","清楚","聽過","沒想過","不知道"]]
+        },
+        "IT科技": {
+            "老闆": [["Git 權限是否依專案與職位嚴格分工？","是","部分","全體開放","無管"],["Server 登入金鑰 (SSH Key) 是否統一控管？","是","散落","共用","不知道"],["是否定期執行源碼或環境資安檢測？","是","偶爾","無","不清楚"],["用於測試的資料是否經過脫敏處理？","是","部分","直接用","不清楚"],["遭受 DDoS 或勒索攻擊後的復原能力？","有演練","有備份","無規劃","無"],["如何管理開源套件的安全性風險？","定期審核","有漏洞再說","不管","未知"],["員工離職後對雲端帳號的停權速度？","即時","天內","常延遲","無流程"],["實施「最小權限原則」的落實程度？","完整","部分","沒落實","不知道"],["是否具備 ISO 27001 等相關資安驗證？","有","取得中","無","沒打算"],["內部技術討論工具的加密安全性？","專屬加密","私通","無管","沒注意"]],
+            "員工": [["曾把開發權限借給同事使用嗎？","從不","偶爾","經常","共用"],["曾私自部署未核准的服務在公司 Server？","從不","偶爾","經常","公司准"],["會把用戶真實數據匯出到本地跑測試嗎？","絕不","偶爾","經常","不得不"],["曾誤把 API Key 或密碼上傳至 GitHub？","從未","發生過","差點","常態"],["在動態牆上分享包含工作螢幕的照片？","不分享","拍到過","常分享","沒差"],["不同雲端服務是否共用同一組金鑰？","各別","部分同","全同","看情況"],["是否常在私人不安全的 Wi-Fi 下連線？","不會","有VPN","無所謂","常連"],["你會延遲安裝電腦或 IDE 的安全補丁嗎？","立即裝","看心情","常延遲","不裝"],["發現系統遭不明嘗試登入時的處置？","立即上報","自己擋","不管","沒發現"],["離職前是否會完全清空私機裡的源碼？","必清","留大部分","留部分","沒清"]]
+        },
+        "餐飲業": {
+            "老闆": [["外送平台與內場系統的安全性？","安全","人工登打","分散","不明"],["每日結帳後的系統稽核由誰執行？","專人","老闆","店長","店員"],["POS 機密碼是否依人員職位分開？","各人","職位分","全店共用","無密"],["員工是否用私人手機操作訂單或改價？","禁","部分","經常","沒管"],["外送訂單留下的客戶電話如何處理？","遮蔽丟","隨意丟","收集成冊","無"],["與食材商往來的匯款細節安全度？","雙重確認","通訊軟體","口頭","不明"],["是否曾有人誤點假總部或假訂餐訊息？","無","曾有人點","點過受損","不知"],["店內監視畫面是否僅限管理員看？","是","部分看","員工可看","不知道"],["店內公用 Wi-Fi 與點餐網路是否分開？","分開","連在一起","沒分","不清楚"],["離職員工對外送平台權限的回收？","立即","偶爾延遲","沒收","無流程"]],
+            "員工": [["外送單上的客戶電話會隨手丟棄嗎？","遮蔽後丟","隨便丟","帶回家","不處理"],["大家是否都用店長的帳號登入 POS？","各人帳","部分共用","全體共用","不知"],["訂餐異動是否常透過私 LINE 轉發截圖？","不會","偶爾","經常","習慣"],["收到來源不明的訂餐連結會先確認嗎？","會","視情況","直接點","點過受害"],["會拍客人的特殊要求或評價到私帳嗎？","不拍","偶爾","經常","沒差"],["是否知道系統會記錄誰改了訂單價格？","知道","大致知","不知道","沒人管"],["會把店用手機帶回家或做私事嗎？","不會","偶爾","經常","沒公機"],["是否知道不能隨便帶走外送後台帳密？","清楚","不知道","沒想過","沒差"],["發現 POS 機被不明安裝軟體會說嗎？","會","不管","視情況","沒發生"],["離職後是否會主動退出店內聯絡群組？","必退","被踢","沒退","看老闆"]]
+        },
+        "其他": {
+            "老闆": [["客戶聯絡清單主要儲存在何處？","雲端加密系統","個人手機","紙本筆記","分散各處"],["是否依賴員工私人手機經營客戶關係？","明確規範","部分依賴","幾乎全靠私機","沒管過"],["外部合作夥伴能看多少客戶個資？","僅必要","大致完整","完全開放","無限制"],["共享資料夾是否會定期清理存取權限？","定期","大變動才清","幾乎沒清過","不清楚"],["商業機密或合約是否在 LINE/FB 直接傳送？","嚴禁","偶爾為之","常態使用","沒限制"],["收集客戶資料前是否有提供個資同意書？","每次都有","看對象","很少有","完全沒有"],["舊電腦或手機回收前是否徹底抹除資料？","專業清理","格式化","直接賣/丟","沒處理"],["是否曾發生員工離職帶走客戶名單？","從未","發生過已解決","發生過且受損","常態"],["遇「國稅局通知」或「包裹簡訊」的應對？","查證流程","大致能辨","曾有人誤點","曾受害"],["若客戶資料遭盜用，是否有公告或補救流程？","有流程","大致知道","沒想過","無準備"]],
+            "員工": [["離開公司後，手機是否仍留有客戶電話？","主動刪除","留重要客戶","全留著","不處理"],["是否常為了方便，將客戶私密資訊拍照？","從未","偶爾","經常","習慣性"],["多個工作平台是否共用同一組簡易密碼？","各別設定","部分雷同","全同","電腦自動記"],["傳送個資檔案時，是否有加密或設密碼？","必加密","看情況","從不加密","不知道"],["是否常在公眾場所連免費網路處理公務？","不會","有 VPN","常連","沒注意過"],["寫有客戶個資的廢紙如何處理？","碎紙機","手撕","隨意丟棄","當草稿紙"],["誤將資料傳到私人群組時會如何處置？","立即回收回報","回收不說","裝沒事","不知道"],["會在社群平台上分享包含工作內容的照片？","不會","偶爾拍到","經常分享","沒想過風險"],["發現帳號有不明登入紀錄時，會主動說嗎？","立即","看情況","不管它","看不出來"],["個人手機/電腦是否裝有安全防護軟體？","有且定期更","有但沒更","沒裝","不清楚"]]
         }
+    };
 
-        // [保險植入 2] 升級後的發信邏輯：先 EmailJS 給客戶，後 Formspree 備份
-        async function handleEmailSubmit(score) {
-            const btn = document.getElementById('submit-email');
-            const emailValue = document.getElementById('user-email').value;
-            const msg = document.getElementById('success-msg');
-            
-            if(!emailValue.includes('@')) return alert('請輸入有效信箱');
-            
-            btn.innerText = "發送中..."; 
-            btn.disabled = true;
+    let currentIndustry = "", currentRole = "", currentQuestions = [], currentStep = 0, totalScore = 0;
 
-            let lvl = score >= 120 ? "極高危險" : score >= 40 ? "中度警戒" : "低度風險";
+    function setIndustry(ind) {
+        currentIndustry = ind;
+        document.getElementById('role-area').classList.remove('hidden');
+    }
 
-            // 準備發給 EmailJS 的參數
-            const templateParams = {
-                user_email: emailValue,
-                score: score,
-                rank: lvl
-            };
+    function startQuiz(role) {
+        currentRole = role;
+        currentQuestions = quizData[currentIndustry][currentRole];
+        document.getElementById('step-select').classList.add('hidden');
+        document.getElementById('step-quiz').classList.remove('hidden');
+        showQuestion();
+    }
 
-            try {
-                // 第一步：寄信給客戶 (EmailJS)
-                await emailjs.send("service_2kl2ayr", "template_jsl6mbh", templateParams);
-
-                // 第二步：資料備份到 Formspree
-                await fetch("https://formspree.io/f/mqakvwdw", {
-                    method: "POST", 
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        email: emailValue, 
-                        score: score, 
-                        industry: state.current.industry, 
-                        role: state.current.role,
-                        risk_rank: lvl
-                    })
-                });
-
-                btn.innerText = "已成功送出"; 
-                msg.classList.remove('hidden');
-            } catch (error) {
-                console.error("發送失敗:", error);
-                alert("報告傳送暫時發生問題，請稍後再試。");
-                btn.innerText = "重新獲取報告";
-                btn.disabled = false;
-            }
+    function showQuestion() {
+        const q = currentQuestions[currentStep];
+        document.getElementById('question-text').innerText = `${currentStep + 1}. ${q[0]}`;
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = "";
+        const scores = [10, 6, 3, 0];
+        for (let i = 1; i <= 4; i++) {
+            const btn = document.createElement('button');
+            btn.className = "option-btn";
+            btn.innerText = q[i];
+            btn.onclick = () => nextStep(scores[i-1]);
+            optionsDiv.appendChild(btn);
         }
+        document.getElementById('progress-fill').style.width = `${(currentStep / currentQuestions.length) * 100}%`;
+    }
 
-        function push(newData) { state.history.push(JSON.parse(JSON.stringify(state.current))); state.current = { ...state.current, ...newData }; render(); }
-        function goBack() { if (state.history.length > 0) { state.current = state.history.pop(); render(); } }
-        function answer(p) { 
-            const nextScore = state.current.score + p; 
-            if (state.current.currentQ < 9) push({ currentQ: state.current.currentQ + 1, score: nextScore }); 
-            else push({ step: 'result', score: nextScore }); 
+    function nextStep(points) {
+        totalScore += points;
+        currentStep++;
+        if (currentStep < currentQuestions.length) showQuestion();
+        else {
+            document.getElementById('step-quiz').classList.add('hidden');
+            document.getElementById('step-email').classList.remove('hidden');
         }
-        function restart() { state = { history: [], current: { step: 'start', industry: '', role: '', currentQ: 0, score: 0 } }; render(); }
-        window.onload = render;
-    </script>
+    }
+
+    function getRank(score) {
+        if (score >= 90) return "極低風險";
+        if (score >= 70) return "低度風險";
+        if (score >= 50) return "中度風險";
+        return "高度風險";
+    }
+
+    function submitResult() {
+        const email = document.getElementById('user-email').value;
+        if (!email || !email.includes('@')) { alert("請輸入有效的 Email"); return; }
+        
+        document.getElementById('status-msg').innerText = "報告發送並存檔中...";
+        const rankText = getRank(totalScore);
+
+        // 1. 發送 EmailJS
+        emailjs.send("service_2kl2ayr", "template_jsl6mbh", {
+            user_email: email,
+            score: totalScore,
+            rank: rankText,
+            industry: currentIndustry,
+            role: currentRole
+        });
+
+        // 2. 自動提交到 Google 表單 (背景傳送)
+        const formID = "1FAIpQLSfte6OLpSk5SRrs2SpICabxlPiRuNbyPUwVxpEaFAQHHY6G1Q";
+        const formData = new URLSearchParams();
+        formData.append("entry.1189791047", currentIndustry);
+        formData.append("entry.1232382204", currentRole);
+        formData.append("entry.1872913577", totalScore);
+        formData.append("entry.1057217280", rankText);
+        formData.append("entry.1218395545", email);
+
+        fetch(`https://docs.google.com/forms/d/e/${formID}/formResponse`, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData.toString()
+        });
+
+        // 3. 顯示結果頁
+        document.getElementById('step-email').classList.add('hidden');
+        document.getElementById('step-finish').classList.remove('hidden');
+        document.getElementById('final-score').innerText = totalScore;
+        document.getElementById('final-rank').innerText = rankText;
+    }
+</script>
 </body>
 </html>
