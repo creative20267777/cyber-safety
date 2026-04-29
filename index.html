@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>資安讚 | 數位資產風險診斷</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -16,73 +16,39 @@
             font-family: 'Noto Sans TC', sans-serif;
             background: radial-gradient(circle at top left, #0f172a, #020617 90%);
             background-color: #020617;
-            margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #f8fafc; padding: 16px;
+            margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #f8fafc; padding: 12px;
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 32px;
-            width: 100%; max-width: 600px; padding: 2.5rem; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
+            width: 100%; max-width: 550px; padding: 1.5rem; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
         }
+        @media (min-width: 768px) { .glass-card { padding: 3rem; border-radius: 32px; } }
         .btn-choice {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-size: 1rem; line-height: 1.5; text-align: left;
+            transition: all 0.2s ease; font-size: 0.95rem; line-height: 1.4; text-align: center; width: 100%;
         }
-        .btn-choice:hover { 
-            background: rgba(14, 165, 233, 0.15); border-color: var(--primary-blue); 
-            transform: translateX(8px); box-shadow: -4px 0 0 var(--primary-blue);
-        }
-        
-        /* 強化版引導按鈕樣式 */
+        @media (min-width: 768px) { .btn-choice { text-align: left; font-size: 1rem; } }
+        .btn-choice:hover, .btn-choice:active { background: rgba(14, 165, 233, 0.15); border-color: var(--primary-blue); transform: scale(1.01); }
         .next-step-btn {
             background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
             box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-            animation: pulse-border 2s infinite;
-        }
-        .next-step-btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 35px -5px rgba(14, 165, 233, 0.6);
-            filter: brightness(1.1);
-        }
-        .next-step-btn:active {
-            transform: translateY(1px) scale(0.98);
-        }
-        /* 光澤閃過特效 */
-        .next-step-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(30deg);
-            transition: none;
-        }
-        .next-step-btn:hover::after {
-            left: 120%;
-            transition: all 0.6s ease;
+            animation: pulse-border 2s infinite; padding: 1.25rem 1rem; font-size: 1.25rem; font-weight: 900;
         }
         @keyframes pulse-border {
             0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
             100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
         }
-
-        .question-text { font-size: 1.4rem; line-height: 1.4; font-weight: 700; margin-bottom: 2rem; color: #fff; }
-        .score-num { font-size: 9rem; line-height: 1; font-weight: 900; letter-spacing: -6px; }
-        .critical-pulse { animation: critical-glow 0.8s infinite alternate; }
-        @keyframes critical-glow {
-            from { text-shadow: 0 0 10px rgba(255, 77, 77, 0.2); transform: scale(1); }
-            to { text-shadow: 0 0 40px rgba(255, 77, 77, 0.8); transform: scale(1.05); }
-        }
-
-        input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1.2rem; border-radius: 16px; width: 100%; font-size: 1.1rem; }
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .score-num { font-size: 6rem; line-height: 1; font-weight: 900; }
+        @media (min-width: 768px) { .score-num { font-size: 9rem; } }
+        .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; line-height: 1.5; }
+        @media (min-width: 768px) { .question-text { font-size: 1.3rem; } }
+        .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; }
+        .progress-fill { height: 100%; background: var(--primary-blue); transition: width 0.3s ease; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1rem; border-radius: 16px; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
@@ -91,7 +57,7 @@
 
 <script>
     const quizData = {
-        "🏥 醫療 / 診所（牙醫、醫美、中醫等）": {
+        "🏥 醫療 / 診所": {
             "老闆": [
                 ["院內病歷與檢查結果主要儲存於？", "系統集中管理，定期備份且加密", "部分存於雲端或硬碟，未統一管理", "紙本與數位混用，無固定存儲標準", "分散在各員工電腦或行動設備"],
                 ["醫師、護理與櫃檯權限是否明確區分？", "權限嚴格分級，僅能看到必要資訊", "部分權限重疊，但有基本控制", "多數員工擁有廣泛的存取權限", "完全無區分，所有人都能看所有資料"],
@@ -111,13 +77,13 @@
                 ["工作時是否會多人共用一組密碼？", "絕對專屬，且定期更換複雜密碼", "少數人知道我的密碼以便代理", "多人共用同一組密碼，大家都知道", "不清楚密碼規則，電腦都自動登入"],
                 ["看到系統升級連結時會先求證嗎？", "必先求證主管，絕不隨意點擊", "視情況而定，看起來像官方就點", "曾點選過不明連結導致電腦異狀", "曾發生中毒事件，但未改變習慣"],
                 ["清楚哪些病患敏感資訊絕不能外傳嗎？", "非常清楚法律責任與個資保護內容", "大致了解，但細節規定不夠明確", "僅知道不能對外宣傳，概念模糊", "不知道有特定限制，認為僅是工作"],
-                ["發現誤傳病患隱私時會立即回報嗎？", "立即向上通報，並執行補救措施", "會先試著自己聯繫對方收回訊息", "視對方反應而定，不一定會說", "不會主動說明，怕被處分或挨罵"],
+                ["發現誤傳病患隱私時會立刻回報嗎？", "立即向上通報，並執行補救措施", "會先試著自己聯繫對方收回訊息", "視對方反應而定，不一定會說", "不會主動說明，怕被處分或挨罵"],
                 ["離職後是否打算保留優良案例或名單？", "絕對不保留，並主動清空相關檔案", "會保留部分去識別化資料作參考", "會保留重要名單以便未來聯繫用", "不打算處理，認為那是我的工作成果"],
                 ["是否曾與同事共享手機處理工作訊息？", "從不會共用手機或社群帳號", "偶爾臨時借用，但會登出帳號", "經常共用設備處理，無防備心", "沒有個人手機，全診所共用公機"],
                 ["傳送報告給醫師時，是否遮蔽姓名電話？", "必定遮蔽，僅提供必要數據參考", "偶爾忘記遮蔽，但會隨後補正", "經常直接傳送原圖，未做任何遮蔽", "沒注意過此問題，醫師沒要求就不遮"]
             ]
         },
-        "🛍️ 零售業（電商、門市、藥局、超市等）": {
+        "🛍️ 零售 / 電商": {
             "老闆": [
                 ["客戶電話與消費紀錄主要存在何處？", "集中於專業系統，有分層授權", "存於雲端硬碟或 Excel，多人共享", "部分由員工留存在個人手機通錄", "分散各處，無統計與保護措施"],
                 ["員工私加客戶通訊軟體的管理政策？", "嚴格禁止，必須使用公司官方帳號", "需事先報備，但私下行為難控管", "默許員工以個人軟體經營熟客", "無規範，鼓勵員工各種方式開發"],
@@ -143,7 +109,7 @@
                 ["離職後會主動退出所有店務群組嗎？", "離職當天必退出並清空對話紀錄", "會等被踢出群組，不主動退出", "部分群組仍留著，因為想看八卦", "從未主動退出，甚至仍有存取權"]
             ]
         },
-        "🏢 中小企業 / 商務服務（顧問、行政、一般公司）": {
+        "🏢 中小企業 / 商務服務": {
             "老闆": [
                 ["公司報價、合約檔案存放於？", "集中式雲端硬碟，有嚴格權限控管", "存於各部門公務電腦，部分共享", "員工各自儲存於個人電腦或隨身碟", "檔案散落各地，且無任何保護"],
                 ["對外寄送合約是否有審核機制？", "必定經過審核，且記錄寄送對象", "採取抽查制度，無完整審核紀錄", "無審核機制，員工可隨意對外寄", "不掌握寄送情況，常發生寄錯版本"],
@@ -160,39 +126,13 @@
                 ["是否常下載公司文件到私人筆電？", "從不下載，僅在公司設備內處理", "偶爾為了回家加班會存入私機", "經常性下載，方便各設備隨時看", "固定工作模式，公司資料全在私機"],
                 ["常透過哪種工具傳送合約給客戶？", "僅限公司官方信箱，且加密附件", "常透過個人 LINE 或 FB 傳送文件", "使用公用雲端連結，且無密碼保護", "隨意使用任何方便的通訊工具"],
                 ["作廢的合約或個資文件如何處置？", "使用專業碎紙機銷毀，並裝袋處理", "直接用手撕毀，丟入一般垃圾桶", "直接丟棄，不認為有人會去翻撿", "當作二次草稿紙，重複利用背面"],
-                ["不同辦公系統是否都用同一組密碼？", "各系統各別設定，且為高強度密碼", "部分雷同，但具備基本複雜度", "全公司系統用同一組，方便好記", "由電腦自動記住，完全不知密碼"],
+                ["不同辦公系統是否都用同一組密碼？", "各別設定高強度密碼，且定期更換", "部分雷同，但具備基本複雜度", "全公司系統用同一組，方便好記", "由電腦自動記住，完全不知密碼"],
                 ["離職時會保留曾做的提案作範本嗎？", "主動清空不保留，尊重智財權", "會保留部分去識別化資料作參考", "能帶走的都會帶走，認為是自產", "已經帶過幾次，未來面試很好用"],
                 ["離開座位時是否會鎖定電腦？", "必先鎖定螢幕，防止他人窺探", "偶爾會忘記，但公司環境算安全", "從不鎖定，大家都認識沒關係", "看心情，忙起來就完全不顧"],
                 ["是否會把公務信件轉寄到私人信箱？", "絕對不轉寄，遵守公司資安規定", "偶爾因工作需要轉寄，隨後刪除", "經常性轉寄，方便回家繼續處理", "必轉寄一份備份，不信任公司系統"],
                 ["收到來源不明的附件會先掃毒嗎？", "必先查證並掃毒，不隨意開啟", "視寄件人而定，大致認識就會開", "不管來源，只要標題吸引就點開", "不知道有毒，曾有點開造成中毒"],
                 ["是否曾隨手將公司內部公告傳出？", "非常謹慎，從不對外討論內務", "曾誤傳給朋友，隨後回收並道歉", "不覺得內部公告有誤傳風險", "沒想過此問題，好玩有趣就傳"],
                 ["離職後是否仍留在前東家的工作群？", "離職當天必退，或由管理員踢出", "部分群組仍留著，因為關係還不錯", "沒退過群，甚至仍有權限觀看", "從未被踢出，也沒主動退出過"]
-            ]
-        },
-        "🍽️ 餐飲業": {
-            "老闆": [
-                ["外送平台與內場系統的安全性？", "系統高度安全，並有獨立權限控管", "安全性普通，採人工登打資料", "檔案分散各處，且無任何保護機制", "不清楚安全性，壞了才找工程師"],
-                ["每日結帳後的系統稽核由誰執行？", "專人審核，且記錄所有異動日誌", "由老闆本人查閱，無正式報表", "由店長代辦，審核流程流於形式", "由店員自行結報，完全無稽核機制"],
-                ["POS 機密碼是否依人員職位分開？", "每人獨立專屬帳密，且權限分層", "依職位區分，同位階可能共用", "全店共用一組密碼，且長期未換", "無密碼管理，電腦開啟即可操作"],
-                ["員工是否用私人手機操作訂單或改價？", "嚴格禁止，必須使用店內專屬設備", "部分權限開放，但無異動追蹤紀錄", "員工經常私機作業，且隨意改價", "完全沒管過，甚至鼓勵私機作業"],
-                ["外送訂單留下的客戶電話如何處理？", "遮蔽後丟棄，或定期清理電子紀錄", "隨意丟棄在垃圾桶，未做處理", "收集成冊作為行銷名單，未加管理", "無固定處理方式，甚至遺落在桌上"],
-                ["與食材商往來的匯款細款安全度？", "必定雙重確認，且核對官方信件", "通常透過 LINE 溝通，口頭承諾多", "無任何保護，資料隨意在群組傳送", "不清楚安全性，相信廠商不會騙人"],
-                ["是否曾有人誤點假總部或假訂餐訊息？", "從未發生過，有完整的查證流程", "曾有人點選過，但幸好未受損", "曾有點選受害經歷，仍無防範機制", "不知道會受騙，不認為有人會來騙"],
-                ["店內監視畫面是否僅限管理員看？", "是，具備高度權限管理與紀錄", "部分管理職可看，但無日誌紀錄", "所有員工皆可隨意觀看或側錄", "不清楚誰在看，沒管過權限問題"],
-                ["店內公用 Wi-Fi 與點餐網路是否分開？", "完全隔離分開，具備專業防火牆", "兩者連在一起，無任何隔離措施", "沒分網路，甚至讓客人共用點餐網", "不清楚網路配置，只要能上網就好"],
-                ["離職員工對外送平台權限的回收？", "離職當天立即停權並改密碼", "偶爾延遲處理，離職後仍能登入", "從未回收，帳號權限長期留存", "無清理機制，不知道誰還有權限"]
-            ],
-            "員工": [
-                ["外送單上的客戶電話會隨手丟棄嗎？", "必定遮蔽後丟棄，保護客戶個資", "隨便撕毀就丟入垃圾桶，未防備", "帶回家留存，覺得以後可以用到", "不處理直接丟，不覺得有什麼危險"],
-                ["大家是否都用店長的帳號登入 POS？", "每位員工皆有獨立帳號，嚴禁共用", "部分共用店長帳號，以便處理異動", "全體員工共用店長帳號，省事方便", "不清楚帳號規則，進來就能用"],
-                ["訂餐異動是否常透過私 LINE 轉發截圖？", "絕對不傳私訊，僅用官方系統備註", "偶爾為了趕單會傳截圖到私群", "經常性習慣動作，為了快速出餐", "都這樣傳，沒聽說過會有資料風險"],
-                ["收到來源不明的訂餐連結會先確認嗎？", "必先查證官網，絕對不點擊不明網址", "視情況而定，看起來像真的就點", "不管三七二十一，點開看才知真假", "曾經點過受害過，仍無防範習慣"],
-                ["會拍客人的特殊要求或評價到私帳嗎？", "絕對不拍，遵守公司隱私規範", "偶爾好玩會拍，但隨後即刪除", "經常拍給朋友看，當作工作談資", "沒差吧，反正客人也不知道被拍"],
-                ["是否知道系統會記錄誰改了訂單價格？", "非常清楚有日誌紀錄，謹慎操作", "大致知道有記，但不清楚詳情", "不知道會記，覺得隨便改沒人知", "完全沒人管過，甚至鼓勵改價攬客"],
-                ["會把店用手機帶回家或做私事嗎？", "絕對不會，下班必歸還並鎖好", "偶爾會帶回家，不小心做些私事", "經常性當作私機使用，已是習慣", "沒發公機，全依賴個人手機作業"],
-                ["是否知道不能隨便帶走外送後台帳密？", "非常清楚法律責任，絕不外流", "不知道這不能帶，覺得那是工具", "沒想過風險，覺得好玩就留著看", "完全不清楚，甚至給外人用過"],
-                ["發現 POS 機被不明安裝軟體會說嗎？", "立即向上通報，並檢視系統異常", "先不管它，只要還能結帳就好", "視心情而定，不一定會想去處理", "完全沒發現過，不覺得那是問題"],
-                ["離職後是否會主動退出店內聯絡群組？", "離職當天必退，或由店長踢出", "會等被踢出群組，不主動退出", "部分群組仍留著，因為想看八卦", "從未被踢出，也沒主動退出過"]
             ]
         },
         "🏭 製造 / 工程 / 技術": {
@@ -221,7 +161,7 @@
                 ["是否知道隨意把製程影片傳出有罪？", "非常清楚法律責任，絕不外傳", "聽說過會有風險，但細節不清楚", "沒想過會有罪，覺得只是工作影片", "完全不知道，認為傳給朋友沒關係"]
             ]
         },
-        "💼 金融 / 專業服務（保險、會計、法律）": {
+        "💼 金融 / 專業服務": {
             "老闆": [
                 ["是否定期執行個資風險與漏洞盤點？", "定期執行專業查核，並有完整報告", "偶爾盤點，但缺乏系統化追蹤", "無相關機制，僅發生問題才檢視", "不清楚法規要求，不認為需要盤點"],
                 ["敏感文件傳送是否強制加密保護？", "強制加密且設期限，符合法遵標準", "有相關建議，但執行程度不一", "無強制規定，視員工個人習慣", "完全未執行，直接寄送附件或連結"],
@@ -305,34 +245,38 @@
 
     function render() {
         const app = document.getElementById('app');
-        
         if (state.step === 'start') {
             app.innerHTML = `
                 <div class="fade-in text-center">
-                    <h1 class="text-4xl font-black mb-4 text-white">數位資產風險診斷</h1>
-                    <p class="text-slate-400 mb-10">選擇行業，開始精準體檢：</p>
-                    <div class="grid grid-cols-1 gap-3">
-                        ${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-2xl font-bold">${ind}</button>`).join('')}
+                    <h1 class="text-2xl md:text-4xl font-black mb-3 text-white">數位資產風險診斷</h1>
+                    <p class="text-slate-400 mb-8 text-sm">選擇行業，開始精準體檢：</p>
+                    <div class="grid grid-cols-1 gap-2">
+                        ${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-bold">${ind}</button>`).join('')}
                     </div>
                 </div>`;
         } 
         else if (state.step === 'role') {
             app.innerHTML = `
                 <div class="fade-in text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-white">您的職位是？</h2>
+                    <h2 class="text-xl font-bold mb-8 text-white">您的職位是？</h2>
                     <div class="flex flex-col gap-4">
-                        <button onclick="selectRole('老闆')" class="btn-choice p-6 rounded-3xl font-black text-xl text-center">老闆 / 決策者</button>
-                        <button onclick="selectRole('員工')" class="btn-choice p-6 rounded-3xl font-black text-xl text-center">員工 / 執行者</button>
+                        <button onclick="selectRole('老闆')" class="btn-choice p-5 rounded-2xl font-black text-lg text-center">老闆 / 決策者</button>
+                        <button onclick="selectRole('員工')" class="btn-choice p-5 rounded-2xl font-black text-lg text-center">員工 / 執行者</button>
                     </div>
-                    <button onclick="goBack()" class="mt-8 text-slate-500 hover:text-white transition">← 返回重新選擇</button>
+                    <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回</button>
                 </div>`;
         } 
         else if (state.step === 'quiz') {
             const questions = quizData[state.industry][state.role];
             const q = questions[state.currentQ];
+            const progress = ((state.currentQ + 1) / questions.length) * 100;
             app.innerHTML = `
                 <div class="fade-in">
-                    <div class="text-[10px] font-black text-sky-500 tracking-widest uppercase mb-4">SCANNING... STEP ${state.currentQ+1}/10</div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] font-black text-sky-500 tracking-widest uppercase">SCANNING... STEP ${state.currentQ+1}/${questions.length}</span>
+                        <span class="text-[10px] text-slate-500">${Math.round(progress)}%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${progress}%"></div></div>
                     <h2 class="question-text">${q[0]}</h2>
                     <div class="flex flex-col gap-3">
                         <button onclick="answer(0)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[1]}</button>
@@ -340,102 +284,51 @@
                         <button onclick="answer(25)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[3]}</button>
                         <button onclick="answer(35)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[4]}</button>
                     </div>
-                    <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回上一題</button>
+                    <div class="text-center"><button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回上一題</button></div>
                 </div>`;
         } 
         else if (state.step === 'guide') {
             const finalScore = Math.min(state.score, 100);
             const isCritical = finalScore >= 70;
             const statusColor = isCritical ? "text-red-500" : "text-orange-500";
-            
             const storyLine = [
-                { 
-                    q: "這分數背後隱藏著巨大的法律危機。<br>您對現有的資料系統感到「真的放心」嗎？", 
-                    btn: "坦白說，我並不放心",
-                    warn: `⚠️ 警告：個資法罰鍰最高可達 **1,500 萬元**，且負責人須負刑事責任。`
-                },
-                { 
-                    q: "很多企業想改善卻步，是因為擔憂...<br>「系統安裝完後，員工真的會用嗎？」", 
-                    btn: "是的，我擔心操作太複雜",
-                    warn: `🚨 您目前的防線漏洞，平均每月讓企業損失高達 **30% 的潛在品牌信任度**。`
-                },
-                { 
-                    q: "最後一個關鍵：您是否認為資安就是一筆「昂貴且看不到回報」的成本？", 
-                    btn: "確實有這層顧慮",
-                    warn: `💡 我們提供的是「自動化防護」，不影響效率且符合法規，將風險降至趨近於零。`
-                }
+                { q: "這分數背後隱藏著巨大的法律危機。<br>您對現有的資料系統感到「真的放心」嗎？", btn: "坦白說，我並不放心", warn: `⚠️ 警告：個資法罰鍰最高可達 **1,500 萬元**，且負責人須負刑事責任。` },
+                { q: "很多企業想改善卻步，是因為擔憂...<br>「系統安裝完後，員工真的會用嗎？」", btn: "是的，我擔心操作太複雜", warn: `🚨 您目前的防線漏洞，平均每月讓企業損失高達 **30% 的品牌信任度**。` },
+                { q: "最後一個關鍵：您是否認為資安就是一筆「昂貴且看不到回報」的成本？", btn: "確實有這層顧慮", warn: `💡 我們提供的是「自動化防護」，不影響效率且符合法規，將風險降至趨近於零。` }
             ];
-
             const currentStory = storyLine[state.guideStep];
-
             app.innerHTML = `
                 <div class="fade-in text-center">
-                    <div class="score-num ${statusColor} ${isCritical ? 'critical-pulse' : ''}">${finalScore}</div>
-                    <div class="text-xl font-black mb-4 ${statusColor} tracking-widest">${isCritical ? '⚠️ 極高風險狀態' : '🚨 中度風險警示'}</div>
-                    
-                    <p class="text-sm text-red-400/80 bg-red-950/30 p-4 rounded-xl mb-8 leading-relaxed font-bold border border-red-500/20">
-                        ${currentStory.warn}
-                    </p>
-
-                    <hr class="border-white/5 my-8">
-                    
-                    <h2 class="text-2xl font-bold mb-10 leading-tight text-white">${currentStory.q}</h2>
-                    
-                    <button onclick="nextGuide()" class="next-step-btn w-full py-6 rounded-2xl font-black text-2xl text-white">
-                        ${currentStory.btn}
-                    </button>
-
-                    <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改診斷答案</button>
+                    <div class="score-num ${statusColor}">${finalScore}</div>
+                    <div class="text-lg font-black mb-6 ${statusColor} tracking-widest">${isCritical ? '⚠️ 極高風險狀態' : '🚨 中度風險警示'}</div>
+                    <div class="text-xs text-red-400/90 bg-red-950/30 p-4 rounded-xl mb-8 font-bold border border-red-500/20">${currentStory.warn}</div>
+                    <h2 class="text-lg font-bold mb-10 leading-tight text-white">${currentStory.q}</h2>
+                    <button onclick="nextGuide()" class="next-step-btn w-full rounded-2xl text-white">${currentStory.btn}</button>
+                    <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改</button>
                 </div>`;
         }
         else if (state.step === 'email') {
             app.innerHTML = `
                 <div class="fade-in text-center">
-                    <h2 class="text-3xl font-black mb-4 text-white">解決您的數位焦慮</h2>
-                    <p class="text-slate-400 mb-8">留下 Email，領取針對您行業的「低成本資安優化清單」，並跳轉至專家預約表單。</p>
+                    <h2 class="text-2xl font-black mb-4 text-white">解決您的數位焦慮</h2>
+                    <p class="text-slate-400 mb-8 text-sm">留下 Email，領取針對您行業的「低成本資安優化清單」，並跳轉至專家預約表單。</p>
                     <input type="email" id="userEmail" placeholder="您的電子信箱" required class="mb-6">
-                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-5 rounded-2xl font-black text-xl shadow-xl transition-all">
-                        送出並獲取解決方案
-                    </button>
+                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl">送出並獲取方案</button>
                 </div>`;
         }
     }
 
     function selectInd(i) { pushState({ step: 'role', industry: i }); }
     function selectRole(r) { pushState({ step: 'quiz', role: r, currentQ: 0, score: 0 }); }
-    
     function answer(p) { 
+        const questions = quizData[state.industry][state.role];
         let nextScore = state.score + p;
-        if (state.currentQ < 9) { 
-            pushState({ currentQ: state.currentQ + 1, score: nextScore }); 
-        } else { 
-            pushState({ step: 'guide', guideStep: 0, score: nextScore }); 
-        }
+        if (state.currentQ < questions.length - 1) { pushState({ currentQ: state.currentQ + 1, score: nextScore }); } 
+        else { pushState({ step: 'guide', guideStep: 0, score: nextScore }); }
     }
-
-    function nextGuide() {
-        if (state.guideStep < 2) { 
-            state.guideStep++; 
-            render(); 
-        } else { 
-            state.step = 'email'; 
-            render(); 
-        }
-    }
-
-    function pushState(newData) { 
-        state.history.push(JSON.parse(JSON.stringify(state))); 
-        state = { ...state, ...newData }; 
-        render(); 
-    }
-
-    function goBack() { 
-        if (state.history.length > 0) { 
-            state = state.history.pop(); 
-            render(); 
-        } 
-    }
-
+    function nextGuide() { if (state.guideStep < 2) { state.guideStep++; render(); } else { state.step = 'email'; render(); } }
+    function pushState(newData) { state.history.push(JSON.parse(JSON.stringify(state))); state = { ...state, ...newData }; render(); }
+    function goBack() { if (state.history.length > 0) { state = state.history.pop(); render(); } }
     async function finalSubmit() {
         const email = document.getElementById('userEmail').value;
         if (!email.includes('@')) { alert('格式不正確'); return; }
@@ -443,15 +336,11 @@
         btn.disabled = true; btn.innerText = "傳送中...";
         const finalScore = Math.min(state.score, 100);
         const rankText = finalScore >= 70 ? "極高風險" : (finalScore >= 40 ? "中度風險" : "低度風險");
-        const finalUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform";
-
         try {
-            const body = new URLSearchParams({ "entry.1189791047": state.industry, "entry.1232382204": state.role, "entry.1872913577": finalScore, "entry.1057217280": rankText, "entry.1111111111": email });
-            fetch(`https://docs.google.com/forms/d/e/1FAIpQLSfte6OLpSk5SRrs2SpICabxlPiRuNbyPUwVxpEaFAQHHY6G1Q/formResponse`, { method: "POST", mode: "no-cors", body: body });
             await emailjs.send("service_7o6i6un", "template_48fngls", { user_email: email, score: finalScore, industry: state.industry, rank: rankText });
-            window.location.href = finalUrl;
+            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform";
         } catch (e) {
-            window.location.href = finalUrl;
+            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform";
         }
     }
     window.onload = render;
