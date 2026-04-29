@@ -22,13 +22,13 @@
             background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
             width: 100%; max-width: 550px; padding: 1.5rem; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+            min-height: 450px; display: flex; flex-direction: column; justify-content: center;
         }
         @media (min-width: 768px) { .glass-card { padding: 3rem; border-radius: 32px; } }
         .btn-choice {
             background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease; font-size: 0.95rem; line-height: 1.4; text-align: center; width: 100%;
+            transition: all 0.2s ease; font-size: 0.95rem; line-height: 1.4; text-align: left; width: 100%;
         }
-        @media (min-width: 768px) { .btn-choice { text-align: left; font-size: 1rem; } }
         .btn-choice:hover, .btn-choice:active { background: rgba(14, 165, 233, 0.15); border-color: var(--primary-blue); transform: scale(1.01); }
         .next-step-btn {
             background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
@@ -43,10 +43,9 @@
         .score-num { font-size: 6rem; line-height: 1; font-weight: 900; font-variant-numeric: tabular-nums; }
         @media (min-width: 768px) { .score-num { font-size: 9rem; } }
         .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; line-height: 1.5; }
-        @media (min-width: 768px) { .question-text { font-size: 1.3rem; } }
-        .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; }
+        .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; width: 100%; }
         .progress-fill { height: 100%; background: var(--primary-blue); transition: width 0.3s ease; }
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; width: 100%; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1rem; border-radius: 16px; width: 100%; text-align: center; }
     </style>
@@ -104,7 +103,7 @@
                 ["是否點過廠商催款或物流更新的連結？", "絕對不點，會透過官方後台查詢", "會懷疑，但看起來很像真的就點", "點過幾次，曾發生電腦當機現象", "曾出過事被停權，但仍會點開看"],
                 ["離職時會想帶走熟客聯絡方式嗎？", "絕不帶走，認為那是公司資產", "留存少數非常熟悉的客戶作紀念", "能帶走的都會存起來，未來可用", "已經帶過幾次，那是我的客戶人脈"],
                 ["發現客人帳號被冒用時會主動反映嗎？", "立即反映並通知主管與客戶處理", "會試著私下聯繫客人確認狀況", "不一定會管，覺得那是系統問題", "不主動說明，怕處理起來很麻煩"],
-                ["是否全程使用私人手機收發訂單？", "從開不使用，公司有專屬設備處理", "偶爾臨時使用，會注意資訊安全", "經常使用私機，方便隨時回覆", "全依賴私機，公司沒提供電子設備"],
+                ["是否全程使用私人手機收發訂單？", "從不使用，公司有專屬設備處理", "偶爾臨時使用，會注意資訊安全", "經常使用私機，方便隨時回覆", "全依賴私機，公司沒提供電子設備"],
                 ["是否知道把報表傳到私人群組有風險？", "非常清楚，絕不傳送個資到私群", "大致知道，但為了溝通方便仍會傳", "沒想過風險，覺得大家都是同事", "不知道有風險，認為傳 LINE 很安全"],
                 ["離職後會主動退出所有店務群組嗎？", "離職當天必退出並清空對話紀錄", "會等被踢出群組，不主動退出", "部分群組仍留著，因為想看八卦", "從未主動退出，甚至仍有存取權"]
             ]
@@ -115,7 +114,7 @@
                 ["對外寄送合約是否有審核機制？", "必定經過審核，且記錄寄送對象", "採取抽查制度，無完整審核紀錄", "無審核機制，員工可隨意對外寄", "不掌握寄送情況，常發生寄錯版本"],
                 ["是否會定期清理離職員工的權限？", "定期執行清理，離職當天即停權", "偶爾會清，但常發生延遲處理", "僅在大規模變動時才會統一回收", "從未清理，許多帳號仍具存取權"],
                 ["員工到職時是否簽署 NDA？", "必定簽署完整協議，並進行宣導", "僅部分核心職位簽署，流於形式", "無相關協議，不認為有簽署必要", "不知道什麼是 NDA，全憑誠信"],
-                ["是否允許在公共咖啡廳處理機敏資料？", "嚴格禁止，限使用 VPN 或公司內網", "有相關規範但難以落實，靠自律", "無特定規範，員工常在戶外處理", "鼓勵員工隨時加班，不限地點設備"],
+                ["是否允許在公共咖啡廳處理機敏資料？", "嚴格禁止，限使用 VPN 或公司內網", "有相關規範但難以落律，靠自律", "無特定規範，員工常在戶外處理", "鼓勵員工隨時加班，不限地點設備"],
                 ["報廢的硬碟或手機如何處置？", "交由專業廠商銷毀並出具證明", "自行重設格式後，隨意丟棄或賣出", "直接丟棄，不認為裡面有重要資料", "沒處理過，舊設備常由員工帶回"],
                 ["如何教育員工分辨假發票郵件？", "定期資安宣導，並建立查證流程", "有警示但不常宣導，靠員工自學", "無任何處理，不認為公司會被騙", "不知道如何分辨，曾發生匯錯款"],
                 ["客戶開發名單的來源與存檔安全？", "合法取得並加密，定期稽核權限", "人工手寫或單純紀錄，存放簡易", "散落各業務手中，甚至帶回家存", "名單來源不明，且完全無保護措施"],
@@ -178,7 +177,7 @@
                 ["提供敏感資料前是否會核對身分？", "必定執行多重查核，核對身分無誤", "視情況而定，大客戶或熟人就免", "聽聲音或大致確認即可，核對寬鬆", "完全不查，客戶要求就直接給"],
                 ["是否會拍客戶的身分證/財測作備份？", "從未拍照留存，嚴守公司保密規定", "偶爾因緊急需要存手機，事後刪除", "經常拍照備份方便紀錄，未管理", "為了方便工作，手機裡全是個資圖"],
                 ["會用 USB 或公用雲端存取客戶資料嗎？", "絕對禁止，僅限在公司系統內流轉", "偶爾使用但會加密，隨後清空檔案", "經常使用公用雲端，方便傳送檔案", "必定使用個人雲端備份，覺得好用"],
-                ["收到扣款或法律查件郵件的反應？", "必先查證官網，絕對不點擊不明信件", "大致懷疑但信件很像，偶爾點開", "不管三七二十一，點開看才知真假", "曾經點開受害過，仍無防範習慣"],
+                ["收到扣款或法律查件郵件的反應？", "必先查證官網，絕對不點擊不明信件", "大致懷疑但信件很像，偶爾點開", "不管三七十一，點開看才知真假", "曾經點開受害過，仍無防範習慣"],
                 ["私人電腦是否存有客戶完整帳務？", "完全沒有，絕不將資料帶離公司", "極少數資料存於私機，未加管理", "部分核心帳務長期存在個人硬碟", "為了在家加班，資料全在私機"],
                 ["離開櫃檯或辦公桌會收好機敏文件嗎？", "必將文件收入保險櫃並鎖定螢幕", "偶爾沒收齊，想說短時間離開沒差", "從不收拾，認為辦公室沒外人進", "完全沒差，甚至隨手攤在桌上"],
                 ["你的專業系統密碼強度是否足夠？", "高強度組合且定期強制換新", "基本長度但過於簡單好記", "非常簡單如生日，且從未換過", "多人知曉共用，甚至直接寫旁邊"],
@@ -245,9 +244,7 @@
 
     function render() {
         const app = document.getElementById('app');
-        
-        // 渲染前先清空，防止進度條殘留
-        app.innerHTML = "";
+        app.innerHTML = ""; // 確保每一幀都清空
 
         if (state.step === 'start') {
             app.innerHTML = `
@@ -255,7 +252,7 @@
                     <h1 class="text-2xl md:text-4xl font-black mb-3 text-white">數位資產風險診斷</h1>
                     <p class="text-slate-400 mb-8 text-sm">選擇行業，開始精準體檢：</p>
                     <div class="grid grid-cols-1 gap-2">
-                        ${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-bold">${ind}</button>`).join('')}
+                        ${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-bold text-center">${ind}</button>`).join('')}
                     </div>
                 </div>`;
         } 
@@ -302,6 +299,7 @@
             ];
             const currentStory = storyLine[state.guideStep];
             
+            // 確保這裡絕對沒有 progress-bar 相關代碼
             app.innerHTML = `
                 <div class="fade-in text-center">
                     <div id="displayScore" class="score-num ${statusColor}">0</div>
@@ -312,7 +310,6 @@
                     <div class="text-center"><button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改</button></div>
                 </div>`;
 
-            // 跳表動畫邏輯 (僅在 guide 第一步觸發)
             if (state.guideStep === 0) {
                 animateValue("displayScore", 0, finalScore, 1500);
             } else {
@@ -323,14 +320,13 @@
             app.innerHTML = `
                 <div class="fade-in text-center">
                     <h2 class="text-2xl font-black mb-4 text-white">解決您的數位焦慮</h2>
-                    <p class="text-slate-400 mb-8 text-sm">留下 Email，領取針對您行業的「低成本資安優化清單」，並跳轉至專家預約表單。</p>
+                    <p class="text-slate-400 mb-8 text-sm">留下Email領取風險測驗結果，並跳轉至個資安全與合規現況需求調查表單。</p>
                     <input type="email" id="userEmail" placeholder="您的電子信箱" required class="mb-6">
-                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl">送出並獲取方案</button>
+                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl">填寫完畢並送出！</button>
                 </div>`;
         }
     }
 
-    // 跳表動畫函式
     function animateValue(id, start, end, duration) {
         const obj = document.getElementById(id);
         if (!obj) return;
@@ -338,7 +334,6 @@
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // 使用 easeOutExpo 讓結尾變慢更有質感
             const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
             obj.innerHTML = Math.floor(easedProgress * (end - start) + start);
             if (progress < 1) {
