@@ -44,8 +44,6 @@
         @media (min-width: 768px) { .score-num { font-size: 9rem; } }
         .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; line-height: 1.5; }
         @media (min-width: 768px) { .question-text { font-size: 1.3rem; } }
-        .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-bottom: 1.5rem; }
-        .progress-fill { height: 100%; background: var(--primary-blue); transition: width 0.3s ease; }
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1rem; border-radius: 16px; width: 100%; text-align: center; }
@@ -269,14 +267,11 @@
         else if (state.step === 'quiz') {
             const questions = quizData[state.industry][state.role];
             const q = questions[state.currentQ];
-            const progress = ((state.currentQ + 1) / questions.length) * 100;
             app.innerHTML = `
                 <div class="fade-in">
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex justify-between items-center mb-6">
                         <span class="text-[10px] font-black text-sky-500 tracking-widest uppercase">SCANNING... STEP ${state.currentQ+1}/${questions.length}</span>
-                        <span class="text-[10px] text-slate-500">${Math.round(progress)}%</span>
                     </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: ${progress}%"></div></div>
                     <h2 class="question-text">${q[0]}</h2>
                     <div class="flex flex-col gap-3">
                         <button onclick="answer(0)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[1]}</button>
@@ -308,7 +303,6 @@
                     <div class="text-center"><button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改</button></div>
                 </div>`;
 
-            // 跳表動畫邏輯 (僅在 guide 第一步觸發)
             if (state.guideStep === 0) {
                 animateValue("displayScore", 0, finalScore, 1500);
             } else {
@@ -326,7 +320,6 @@
         }
     }
 
-    // 跳表動畫函式
     function animateValue(id, start, end, duration) {
         const obj = document.getElementById(id);
         if (!obj) return;
@@ -334,7 +327,6 @@
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // 使用 easeOutExpo 讓結尾變慢更有質感
             const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
             obj.innerHTML = Math.floor(easedProgress * (end - start) + start);
             if (progress < 1) {
