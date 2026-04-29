@@ -40,7 +40,7 @@
             70% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
             100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
         }
-        .score-num { font-size: 6rem; line-height: 1; font-weight: 900; }
+        .score-num { font-size: 6rem; line-height: 1; font-weight: 900; font-variant-numeric: tabular-nums; }
         @media (min-width: 768px) { .score-num { font-size: 9rem; } }
         .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; line-height: 1.5; }
         @media (min-width: 768px) { .question-text { font-size: 1.3rem; } }
@@ -149,7 +149,7 @@
                 ["是否禁止私自插接不明隨身碟入產線？", "嚴格禁止，並實施 USB 孔位封鎖", "有宣導稱但難以落實，員工常私插", "完全沒管過，為了傳檔案經常互插", "不覺得危險，沒聽過隨身碟有毒"]
             ],
             "員工": [
-                ["會為了回家加班私存設計圖紙嗎？", "絕對不會，資料不離廠或內網", "偶爾為了趕工會私存在隨身碟", "經常性存入私人電腦方便工作", "固定工作模式，為了效率必存私機"],
+                ["會為了回家加班私存設計圖紙嗎？", "絕對不會，資料不離廠或內網", "偶爾為了趕工會私存在隨身碟", "經常性存入私人電腦方便工作", "固定工作模式，公司資料全在私機"],
                 ["與工班聯繫是否全程使用私機？", "從不使用私訊，僅透過公務對講機", "偶爾臨時加 LINE 聯繫工程進度", "經常性使用私人手機處理工務", "全依賴私人社群，因為溝通最快"],
                 ["會在公務電腦插私人手機充電或存檔嗎？", "絕對不會，嚴格遵守設備使用規定", "偶爾臨時充個電，但不傳送資料", "經常性互傳檔案，為了工作方便", "沒想過會有危險，當作自己電腦"],
                 ["是否曾安裝未經授權的工程或測試軟體？", "絕對不會，必經 IT 核准才安裝", "偶爾私下架設測試環境，隨後關閉", "經常性下載不明來源軟體做測試", "公司沒管，看到好用軟體就裝"],
@@ -280,9 +280,9 @@
                     <h2 class="question-text">${q[0]}</h2>
                     <div class="flex flex-col gap-3">
                         <button onclick="answer(0)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[1]}</button>
-                        <button onclick="answer(15)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[2]}</button>
-                        <button onclick="answer(25)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[3]}</button>
-                        <button onclick="answer(35)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[4]}</button>
+                        <button onclick="answer(5)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[2]}</button>
+                        <button onclick="answer(9)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[3]}</button>
+                        <button onclick="answer(12)" class="btn-choice p-4 rounded-xl text-slate-300 hover:text-white">${q[4]}</button>
                     </div>
                     <div class="text-center"><button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回上一題</button></div>
                 </div>`;
@@ -297,15 +297,23 @@
                 { q: "最後一個關鍵：您是否認為資安就是一筆「昂貴且看不到回報」的成本？", btn: "確實有這層顧慮", warn: `💡 我們提供的是「自動化防護」，不影響效率且符合法規，將風險降至趨近於零。` }
             ];
             const currentStory = storyLine[state.guideStep];
+            
             app.innerHTML = `
                 <div class="fade-in text-center">
-                    <div class="score-num ${statusColor}">${finalScore}</div>
+                    <div id="displayScore" class="score-num ${statusColor}">0</div>
                     <div class="text-lg font-black mb-6 ${statusColor} tracking-widest">${isCritical ? '⚠️ 極高風險狀態' : '🚨 中度風險警示'}</div>
                     <div class="text-xs text-red-400/90 bg-red-950/30 p-4 rounded-xl mb-8 font-bold border border-red-500/20">${currentStory.warn}</div>
                     <h2 class="text-lg font-bold mb-10 leading-tight text-white">${currentStory.q}</h2>
                     <button onclick="nextGuide()" class="next-step-btn w-full rounded-2xl text-white">${currentStory.btn}</button>
-                    <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改</button>
+                    <div class="text-center"><button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改</button></div>
                 </div>`;
+
+            // 跳表動畫邏輯 (僅在 guide 第一步觸發)
+            if (state.guideStep === 0) {
+                animateValue("displayScore", 0, finalScore, 1500);
+            } else {
+                document.getElementById('displayScore').innerText = finalScore;
+            }
         }
         else if (state.step === 'email') {
             app.innerHTML = `
@@ -316,6 +324,24 @@
                     <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl">送出並獲取方案</button>
                 </div>`;
         }
+    }
+
+    // 跳表動畫函式
+    function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            // 使用 easeOutExpo 讓結尾變慢更有質感
+            const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            obj.innerHTML = Math.floor(easedProgress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
 
     function selectInd(i) { pushState({ step: 'role', industry: i }); }
