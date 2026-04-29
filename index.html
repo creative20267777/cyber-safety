@@ -31,8 +31,48 @@
             background: rgba(14, 165, 233, 0.15); border-color: var(--primary-blue); 
             transform: translateX(8px); box-shadow: -4px 0 0 var(--primary-blue);
         }
-        .question-text { font-size: 1.4rem; line-height: 1.4; font-weight: 700; margin-bottom: 2rem; color: #fff; }
         
+        /* 強化版引導按鈕樣式 */
+        .next-step-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: pulse-border 2s infinite;
+        }
+        .next-step-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 35px -5px rgba(14, 165, 233, 0.6);
+            filter: brightness(1.1);
+        }
+        .next-step-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        /* 光澤閃過特效 */
+        .next-step-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: none;
+        }
+        .next-step-btn:hover::after {
+            left: 120%;
+            transition: all 0.6s ease;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        }
+
+        .question-text { font-size: 1.4rem; line-height: 1.4; font-weight: 700; margin-bottom: 2rem; color: #fff; }
         .score-num { font-size: 9rem; line-height: 1; font-weight: 900; letter-spacing: -6px; }
         .critical-pulse { animation: critical-glow 0.8s infinite alternate; }
         @keyframes critical-glow {
@@ -136,7 +176,7 @@
                 ["POS 機密碼是否依人員職位分開？", "每人獨立專屬帳密，且權限分層", "依職位區分，同位階可能共用", "全店共用一組密碼，且長期未換", "無密碼管理，電腦開啟即可操作"],
                 ["員工是否用私人手機操作訂單或改價？", "嚴格禁止，必須使用店內專屬設備", "部分權限開放，但無異動追蹤紀錄", "員工經常私機作業，且隨意改價", "完全沒管過，甚至鼓勵私機作業"],
                 ["外送訂單留下的客戶電話如何處理？", "遮蔽後丟棄，或定期清理電子紀錄", "隨意丟棄在垃圾桶，未做處理", "收集成冊作為行銷名單，未加管理", "無固定處理方式，甚至遺落在桌上"],
-                ["與食材商往來的匯款細節安全度？", "必定雙重確認，且核對官方信件", "通常透過 LINE 溝通，口頭承諾多", "無任何保護，資料隨意在群組傳送", "不清楚安全性，相信廠商不會騙人"],
+                ["與食材商往來的匯款細款安全度？", "必定雙重確認，且核對官方信件", "通常透過 LINE 溝通，口頭承諾多", "無任何保護，資料隨意在群組傳送", "不清楚安全性，相信廠商不會騙人"],
                 ["是否曾有人誤點假總部或假訂餐訊息？", "從未發生過，有完整的查證流程", "曾有人點選過，但幸好未受損", "曾有點選受害經歷，仍無防範機制", "不知道會受騙，不認為有人會來騙"],
                 ["店內監視畫面是否僅限管理員看？", "是，具備高度權限管理與紀錄", "部分管理職可看，但無日誌紀錄", "所有員工皆可隨意觀看或側錄", "不清楚誰在看，沒管過權限問題"],
                 ["店內公用 Wi-Fi 與點餐網路是否分開？", "完全隔離分開，具備專業防火牆", "兩者連在一起，無任何隔離措施", "沒分網路，甚至讓客人共用點餐網", "不清楚網路配置，只要能上網就好"],
@@ -166,7 +206,7 @@
                 ["對合作廠商是否簽署智財保護合約？", "必定簽署正式合約，並具備罰則", "偶爾有簽，但對合約內容不熟悉", "從未簽署任何合約，全憑互信", "不知道要簽，甚至沒想過智財風險"],
                 ["公司有多少對外連網的工業設備？", "完全掌握清單，且定期更新系統", "僅知部分設備連網，其餘不清楚", "完全不清楚有哪些設備是連網的", "沒管過設備連網問題，壞了才修"],
                 ["當產線系統中勒索病毒的應援？", "有完整異地備份與快速復原計畫", "僅有備份 but 未演練，不知能否用", "無任何應變規劃，僅能付錢了事", "不認為會中病毒，從未做任何準備"],
-                ["是否禁止私自插接不明隨身碟入產線？", "嚴格禁止，並實施 USB 孔位封鎖", "有宣導但難以落實，員工常私插", "完全沒管過，為了傳檔案經常互插", "不覺得危險，沒聽過隨身碟有毒"]
+                ["是否禁止私自插接不明隨身碟入產線？", "嚴格禁止，並實施 USB 孔位封鎖", "有宣導稱但難以落實，員工常私插", "完全沒管過，為了傳檔案經常互插", "不覺得危險，沒聽過隨身碟有毒"]
             ],
             "員工": [
                 ["會為了回家加班私存設計圖紙嗎？", "絕對不會，資料不離廠或內網", "偶爾為了趕工會私存在隨身碟", "經常性存入私人電腦方便工作", "固定工作模式，為了效率必存私機"],
@@ -315,7 +355,7 @@
                     warn: `⚠️ 警告：個資法罰鍰最高可達 **1,500 萬元**，且負責人須負刑事責任。`
                 },
                 { 
-                    q: "想改善但卻步，是因為擔憂...<br>「系統安裝完後，員工真的會用嗎？」", 
+                    q: "很多企業想改善卻步，是因為擔憂...<br>「系統安裝完後，員工真的會用嗎？」", 
                     btn: "是的，我擔心操作太複雜",
                     warn: `🚨 您目前的防線漏洞，平均每月讓企業損失高達 **30% 的潛在品牌信任度**。`
                 },
@@ -341,9 +381,10 @@
                     
                     <h2 class="text-2xl font-bold mb-10 leading-tight text-white">${currentStory.q}</h2>
                     
-                    <button onclick="nextGuide()" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-black text-xl shadow-2xl transition-all active:scale-95">
+                    <button onclick="nextGuide()" class="next-step-btn w-full py-6 rounded-2xl font-black text-2xl text-white">
                         ${currentStory.btn}
                     </button>
+
                     <button onclick="goBack()" class="mt-8 text-slate-500 text-sm hover:text-white transition">← 返回修改診斷答案</button>
                 </div>`;
         }
@@ -351,10 +392,10 @@
             app.innerHTML = `
                 <div class="fade-in text-center">
                     <h2 class="text-3xl font-black mb-4 text-white">解決您的數位焦慮</h2>
-                    <p class="text-slate-400 mb-8">留下Email領取風險測驗結果，並跳轉至個資安全與合規現況需求調查表單。</p>
+                    <p class="text-slate-400 mb-8">留下 Email，領取針對您行業的「低成本資安優化清單」，並跳轉至專家預約表單。</p>
                     <input type="email" id="userEmail" placeholder="您的電子信箱" required class="mb-6">
                     <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-5 rounded-2xl font-black text-xl shadow-xl transition-all">
-                        填寫完成且送出!
+                        送出並獲取解決方案
                     </button>
                 </div>`;
         }
