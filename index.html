@@ -245,6 +245,10 @@
 
     function render() {
         const app = document.getElementById('app');
+        
+        // 渲染前先清空，防止進度條殘留
+        app.innerHTML = "";
+
         if (state.step === 'start') {
             app.innerHTML = `
                 <div class="fade-in text-center">
