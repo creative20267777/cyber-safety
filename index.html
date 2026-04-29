@@ -46,7 +46,8 @@
         @media (min-width: 768px) { .question-text { font-size: 1.3rem; } }
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1rem; border-radius: 16px; width: 100%; text-align: center; }
+        input[type="email"] { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 1rem; border-radius: 16px; width: 100%; text-align: center; font-size: 1.1rem; }
+        input[type="email"]:focus { border-color: var(--primary-blue); outline: none; }
     </style>
 </head>
 <body>
@@ -100,7 +101,7 @@
                 ["曾拍攝出貨單、報表或螢幕個資嗎？", "從未發生，嚴禁將個資留存相簿", "偶爾因工作需要暫存，隨後刪除", "經常拍照以便下班後處理店務", "已經是習慣，手機滿是客戶資訊"],
                 ["POS 機密碼是否長期不更換或共用？", "定期強制換新，且每人帳號獨立", "偶爾更換，但密碼通常過於簡單", "從未換過，大家都知道彼此密碼", "多人知曉通用密碼，甚至寫在旁邊"],
                 ["是否點過廠商催款或物流更新的連結？", "絕對不點，會透過官方後台查詢", "會懷疑，但看起來很像真的就點", "點過幾次，曾發生電腦當機現象", "曾出過事被停權，但仍會點開看"],
-                ["離職時會想帶走熟客聯絡方式嗎？", "絕不帶走，認為那是公司資產", "留存少數非常熟悉的客戶作紀念", "能帶走的都會存起來，未來可用", "已經帶過幾次，那是我的客戶人脈"],
+                ["離職時會想帶走熟客聯絡方式嗎？", "絕不帶走，認為那是公司資產", "留存少數非常熟悉的客戶作紀念", "能帶走的都會帶走，未來可用", "已經帶過幾次，那是我的客戶人脈"],
                 ["發現客人帳號被冒用時會主動反映嗎？", "立即反映並通知主管與客戶處理", "會試著私下聯繫客人確認狀況", "不一定會管，覺得那是系統問題", "不主動說明，怕處理起來很麻煩"],
                 ["是否全程使用私人手機收發訂單？", "從開不使用，公司有專屬設備處理", "偶爾臨時使用，會注意資訊安全", "經常使用私機，方便隨時回覆", "全依賴私機，公司沒提供電子設備"],
                 ["是否知道把報表傳到私人群組有風險？", "非常清楚，絕不傳送個資到私群", "大致知道，但為了溝通方便仍會傳", "沒想過風險，覺得大家都是同事", "不知道有風險，認為傳 LINE 很安全"],
@@ -124,7 +125,7 @@
                 ["是否常下載公司文件到私人筆電？", "從不下載，僅在公司設備內處理", "偶爾為了回家加班會存入私機", "經常性下載，方便各設備隨時看", "固定工作模式，公司資料全在私機"],
                 ["常透過哪種工具傳送合約給客戶？", "僅限公司官方信箱，且加密附件", "常透過個人 LINE 或 FB 傳送文件", "使用公用雲端連結，且無密碼保護", "隨意使用任何方便的通訊工具"],
                 ["作廢的合約或個資文件如何處置？", "使用專業碎紙機銷毀，並裝袋處理", "直接用手撕毀，丟入一般垃圾桶", "直接丟棄，不認為有人會去翻撿", "當作二次草稿紙，重複利用背面"],
-                ["不同辦公系統是否都用同一組密碼？", "各別設定高強度密碼，且定期更換", "部分雷同，但具備基本複雜度", "全公司系統用同一組，方便好記", "由電腦自動記住，完全不知密碼"],
+                ["不同辦公系統是否都用同一組密碼？", "各別設定高強度密碼，且定期更換", "部分雷同，但具備基本複雜度", "全公司系統用同一組，方便好記", "電腦自動記住，完全不清楚密碼"],
                 ["離職時會保留曾做的提案作範本嗎？", "主動清空不保留，尊重智財權", "會保留部分去識別化資料作參考", "能帶走的都會帶走，認為是自產", "已經帶過幾次，未來面試很好用"],
                 ["離開座位時是否會鎖定電腦？", "必先鎖定螢幕，防止他人窺探", "偶爾會忘記，但公司環境算安全", "從不鎖定，大家都認識沒關係", "看心情，忙起來就完全不顧"],
                 ["是否會把公務信件轉寄到私人信箱？", "絕對不轉寄，遵守公司資安規定", "偶爾因工作需要轉寄，隨後刪除", "經常性轉寄，方便回家繼續處理", "必轉寄一份備份，不信任公司系統"],
@@ -174,12 +175,12 @@
             ],
             "員工": [
                 ["提供敏感資料前是否會核對身分？", "必定執行多重查核，核對身分無誤", "視情況而定，大客戶或熟人就免", "聽聲音或大致確認即可，核對寬鬆", "完全不查，客戶要求就直接給"],
-                ["是否會拍客戶的身分證/財測作備份？", "從未拍照留存，嚴守公司保密規定", "偶爾因緊急需要存手機，事後刪除", "經常拍照備份方便紀錄，未管理", "為了方便工作，手機裡全是個資圖"],
-                ["會用 USB 或公用雲端存取客戶資料嗎？", "絕對禁止，僅限在公司系統內流轉", "偶爾使用但會加密，隨後清空檔案", "經常使用公用雲端，方便傳送檔案", "必定使用個人雲端備份，覺得好用"],
+                ["是否會拍客戶的身分證/財測作備份？", "從未拍照留存，嚴守公司保密規定", "偶爾因緊急需要存手機，事後刪除", "經常性習慣拍照備份，未加管理", "為了方便工作，手機裡全是個資圖"],
+                ["會用 USB 或公用雲端存取客戶資料嗎？", "絕對禁止，僅限在公司系統內流轉", "偶爾使用但會加密，隨後清空檔案", "經常性使用公用雲端，方便傳送檔案", "必定使用個人雲端備份，覺得好用"],
                 ["收到扣款或法律查件郵件的反應？", "必先查證官網，絕對不點擊不明信件", "大致懷疑但信件很像，偶爾點開", "不管三七二十一，點開看才知真假", "曾經點開受害過，仍無防範習慣"],
                 ["私人電腦是否存有客戶完整帳務？", "完全沒有，絕不將資料帶離公司", "極少數資料存於私機，未加管理", "部分核心帳務長期存在個人硬碟", "為了在家加班，資料全在私機"],
                 ["離開櫃檯或辦公桌會收好機敏文件嗎？", "必將文件收入保險櫃並鎖定螢幕", "偶爾沒收齊，想說短時間離開沒差", "從不收拾，認為辦公室沒外人進", "完全沒差，甚至隨手攤在桌上"],
-                ["你的專業系統密碼強度是否足夠？", "高強度組合且定期強制換新", "基本長度但過於簡單好記", "非常簡單如生日，且從未換過", "多人知曉共用，甚至直接寫旁邊"],
+                ["你的專業系統密碼強度是否足夠？", "高強度組合且定期強制換新", "基本長度內但過於簡單好記", "非常簡單如生日，且從未換過", "多人知曉共用，甚至直接寫旁邊"],
                 ["存有機敏資料的手機遺失會立刻說嗎？", "立即向上通報，並遠端清空資料", "會先找看看，找不到才考慮說", "不打算說明，怕丟工作或賠錢", "沒發生過，不認為會造成影響"],
                 ["看到同事隨意處理客戶個資會提醒嗎？", "會立即提醒並檢舉，維持資安文化", "私下善意提醒，不會正式報備", "不管閒事，認為每人有自己做法", "完全沒注意，不覺得那有什麼風險"],
                 ["換公司時是否打算保留原客戶名冊？", "絕對清空，遵守道德與法律合約", "保留重要客戶聯絡方式作參考", "能留多少就留多少，當作未來人脈", "已經私下帶走備份，並開始聯絡"]
@@ -193,7 +194,7 @@
                 ["用於測試的資料是否經過脫敏處理？", "是，絕對禁止使用真實數據測試", "部分數據有處理，但仍有漏洞", "直接拿線上真實數據進行測試", "不清楚脫敏，不認為這有什麼風險"],
                 ["遭受 DDoS 或勒索攻擊後的復原能力？", "有完整自動化災難復原演練紀錄", "僅有基本備份，但從未實際演練", "無相關規劃，發生時僅能隨機處理", "完全沒備份，不相信會被攻擊"],
                 ["如何管理開源套件的安全性風險？", "有定期審核機制，並限制版本", "有漏洞再說，平常不主動管理", "完全沒管，看到能用的套件就裝", "不清楚套件風險，不認為需要管"],
-                ["員工離職後對雲端帳號的停權速度？", "離職當天立即停權並收回帳密", "一週內處理完畢，但常有延遲", "離職後仍保有存取權限數週以上", "無固定清理流程，帳號長期留存"],
+                ["員工離職後對雲端帳號的停權速度？", "離職當天立即停權並收回帳密", "一週內處理完畢，但常有營運延遲", "離職後仍保有存取權限數週以上", "無固定清理流程，帳號長期留存"],
                 ["實施「最小權限原則」的落實程度？", "完整落實，每人僅能存取必要資源", "部分落實，但權限仍偏寬鬆", "完全沒落實，為了開發效率而全開", "不知道此原則，不覺得權限是問題"],
                 ["是否具備 ISO 27001 等相關資安驗證？", "已有正式認證，並持續維護中", "正準備申請中，流程尚未合規", "完全沒想過，不認為對業務有幫助", "不知道有這種驗證，且沒打算做"],
                 ["內部技術討論工具的加密安全性？", "使用專屬加密工具，且有日誌紀錄", "使用私人群組，但無資料安全管控制度", "無管控制度，資料隨意在群組傳送", "沒注意過，認為討論技術不需要加密"]
@@ -205,7 +206,7 @@
                 ["曾誤把 API Key 或密碼上傳至 GitHub？", "從未發生，上傳前必經自動檢查", "發生過一次，隨後立即廢止並更新", "差點發生，幸好及時攔截或沒人點", "常態性發生，甚至沒做脫敏處理"],
                 ["在動態牆上分享包含工作螢幕的照片？", "絕對不分享，保護專案秘密", "拍過幾次背景，沒注意到有代碼", "常分享加班點滴，螢幕畫面也入鏡", "沒差吧，反正一般人也看不懂代碼"],
                 ["不同雲端服務是否共用同一組金鑰？", "各別設定專屬金鑰，絕不共用", "部分服務同用，但金鑰具備安全性", "全體服務共用同一組，方便好記", "看情況，有時候乾脆不設密碼"],
-                ["是否常在私人不安全的 Wi-Fi 下連線？", "絕對不會，必先連線公司 VPN", "有 VPN 但嫌慢，偶爾直接連外網", "完全無所謂，家裡 Wi-Fi 也是公開", "經常連公用免費網路，沒想過風險"],
+                ["是否常在私人不安全的 Wi-Fi 下連線？", "絕對不會，必先連線公司 VPN", "有 VPN 但嫌慢，偶爾直接連", "完全無所謂，家裡 Wi-Fi 也是公開", "經常連公用免費網路，沒想過風險"],
                 ["你會延遲安裝電腦或 IDE 的安全補丁嗎？", "立即安裝並更新，不留任何漏洞", "看心情安裝，通常等有空再說", "經常延遲數月，不認為補丁重要", "完全不裝，怕裝了軟體就跑不動"],
                 ["發現系統遭不明嘗試登入時的處置？", "立即上報並追蹤來源 IP 與行為", "先試著自己擋掉，不一定會說", "不當一回事，覺得系統本來就有人闖", "完全沒發現，沒在看 Log 紀錄"],
                 ["離職前是否會完全清空私機裡的源碼？", "離職當天必清空，尊重智財權", "會保留大部分資料，方便未來查閱", "能帶走的都會帶走，認為是自產", "完全沒清，打算拿去下間公司用"]
@@ -222,7 +223,7 @@
                 ["舊電腦或手機回收前是否徹底抹除資料？", "交由專業廠商銷毀，並有完整報告", "僅自行格式化，不保證無法還原", "直接賣給二手店，不認為有資料", "沒處理過，舊設備直接丟棄垃圾桶"],
                 ["是否曾發生員工離職帶走客戶名單？", "從未發生過，有完整保密機制", "發生過幾次，已進行法律追究", "發生過嚴重外流，目前仍感困擾", "常態性發生，不知道怎麼防止"],
                 ["遇「國稅局通知」或「包裹簡訊」的應對？", "有標準查證流程，必定先核對官網", "大致能辨別真假，但偶爾仍會猶疑", "曾有人誤點過，差點造成嚴重損失", "曾經受害過，仍未建立防範文化"],
-                ["若客戶資料遭盜用，是否有公告或補救流程？", "有應變流程，包含法律與公告", "大致知道流程，但缺乏實際演練", "完全沒想過，到時候發生再說吧", "無準備，不認為會發生在自己身上"]
+                ["若客戶資料遭盜用，是否有公告或補救流程？", "有應變流程，包含法律與公告", "大致知道流程，但缺乏實際演練", "完全沒想過，到時候發生時再說吧", "無準備，不清楚相關法律責任"]
             ],
             "員工": [
                 ["離開公司後，手機是否仍留有客戶電話？", "主動清空，絕不帶走公司資產", "留存重要熟客聯絡方式作紀念", "全部留著，打算作為未來人脈用", "不打算處理，覺得那是我的努力"],
@@ -313,9 +314,9 @@
             app.innerHTML = `
                 <div class="fade-in text-center">
                     <h2 class="text-2xl font-black mb-4 text-white">解決您的數位焦慮</h2>
-                    <p class="text-slate-400 mb-8 text-sm">留下Email領取測驗結果，並跳轉至個資安全與合規現況需求調查表單</p>
-                    <input type="email" id="userEmail" placeholder="您的電子信箱" required class="mb-6">
-                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl">填寫完畢並送出！</button>
+                    <p class="text-slate-400 mb-8 text-sm">留下 Email 領取診斷建議，並完成最後的需求確認單</p>
+                    <input type="email" id="userEmail" placeholder="請輸入您的 Email" required class="mb-6">
+                    <button onclick="finalSubmit()" id="submitBtn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black text-lg shadow-xl transition-all active:scale-95">點我領取結果 & 填寫需求單</button>
                 </div>`;
         }
     }
@@ -347,18 +348,60 @@
     function nextGuide() { if (state.guideStep < 2) { state.guideStep++; render(); } else { state.step = 'email'; render(); } }
     function pushState(newData) { state.history.push(JSON.parse(JSON.stringify(state))); state = { ...state, ...newData }; render(); }
     function goBack() { if (state.history.length > 0) { state = state.history.pop(); render(); } }
+
     async function finalSubmit() {
         const email = document.getElementById('userEmail').value;
-        if (!email.includes('@')) { alert('格式不正確'); return; }
+        if (!email.includes('@')) { alert('請輸入正確的 Email 格式'); return; }
+        
         const btn = document.getElementById('submitBtn');
-        btn.disabled = true; btn.innerText = "傳送中...";
+        btn.disabled = true; 
+        btn.innerText = "正在處理中，請稍候...";
+        
         const finalScore = Math.min(state.score, 100);
         const rankText = finalScore >= 70 ? "極高風險" : (finalScore >= 40 ? "中度風險" : "低度風險");
+
+        // Google 表單詳細配置
+        const formID = "1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg";
+        const entry_email = "entry.1332400305";
+        const entry_industry = "entry.1983050965";
+        const entry_role = "entry.1740927764";
+        const entry_score = "entry.1695780517";
+        const entry_rank = "entry.114138676";
+        
+        const googleFormAction = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
+        
+        // 1. 建立 FormData 傳送給 Google Form 背景紀錄
+        const formData = new FormData();
+        formData.append(entry_email, email);
+        formData.append(entry_industry, state.industry);
+        formData.append(entry_role, state.role);
+        formData.append(entry_score, finalScore);
+        formData.append(entry_rank, rankText);
+
         try {
-            await emailjs.send("service_7o6i6un", "template_48fngls", { user_email: email, score: finalScore, industry: state.industry, rank: rankText });
-            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform";
+            // A. 先執行 EmailJS 寄發報告給管理者/使用者
+            await emailjs.send("service_7o6i6un", "template_48fngls", { 
+                user_email: email, 
+                score: finalScore, 
+                industry: state.industry, 
+                rank: rankText 
+            });
+
+            // B. 透過 FETCH 把數據背景塞進 Google 表單紀錄（靜默執行）
+            fetch(googleFormAction, {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            });
+
+            // C. 最後直接跳轉到表單頁面讓使用者填寫詳細資訊 (帶入預填 Email)
+            const prefillUrl = `https://docs.google.com/forms/d/e/${formID}/viewform?${entry_email}=${encodeURIComponent(email)}`;
+            window.location.href = prefillUrl;
+            
         } catch (e) {
-            window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform";
+            console.error("提交過程發生問題:", e);
+            // 萬一出錯，直接強行跳轉到表單，確保流程不中斷
+            window.location.href = `https://docs.google.com/forms/d/e/${formID}/viewform?${entry_email}=${encodeURIComponent(email)}`;
         }
     }
     window.onload = render;
