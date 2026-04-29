@@ -33,6 +33,8 @@
         .back-btn:hover { color: #fff; }
         @keyframes alert-pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.02); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
         .critical-alert { animation: alert-pulse 1s infinite; border: 4px solid #ef4444 !important; }
+        .loading-spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #0ea5e9; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -243,7 +245,7 @@
                 ["傳送個資檔案時，是否有加密或設密碼？", "必定加密保護，且傳送期限設定", "視對方要求而定，不主動加密", "從不加密，覺得傳檔案沒那麼危險", "不清楚怎麼加密，直接點附件傳"],
                 ["是否常在公眾場所連免費網路處理公務？", "絕對不會，知道這有極大被盜風險", "有連 VPN 但嫌慢，偶爾直接連", "完全無所謂，反正大家都在連", "經常連，沒想過會跟資安扯上關係"],
                 ["寫有客戶個資的廢紙如何處理？", "使用專業碎紙機銷毀，並分袋處理", "直接用手撕毀丟垃圾桶，未防備", "直接丟棄，不認為有人會去翻撿", "當作二次草稿紙，重複利用背面"],
-                ["誤將資料傳到私人群組時會如何處置？", "立即回收並向上通報資安事件", "立即回收，但裝作沒發生過不說", "不一定會回收，看群組有沒有人看", "不知道會傳錯，甚至覺得沒差"],
+                ["誤將資料傳到私人群組時會如何處置？", "立即回收並向上通報資安事件", "立即回收，裝作沒發生過不說", "不一定會回收，看群組有沒有人看", "不知道會傳錯，甚至覺得沒差"],
                 ["會在社群平台上分享包含工作內容的照片？", "絕對不分享，保護公司智財與隱私", "偶爾拍到背景上傳，未曾被提醒", "經常性分享工作點滴，畫面入鏡多", "沒想過風險，覺得只是在記錄生活"],
                 ["發現帳號有不明登入紀錄時，會主動說嗎？", "立即向上通報，並進行帳號鎖定", "先試著自己換密碼，不一定會說", "不管它，覺得可能是系統誤報", "完全沒發現，從來不看安全通知"],
                 ["個人手機/電腦是否裝有安全防護軟體？", "有安裝正式版，並定期更新病毒碼", "有裝免費版，但很少去更新它", "完全沒裝，覺得自己的電腦很安全", "不清楚有沒有裝，電腦能動就好"]
@@ -255,6 +257,8 @@
 
     function render() {
         const app = document.getElementById('app');
+        window.scrollTo(0, 0); // 每次切換狀態回到頂部
+
         if (state.step === 'start') {
             app.innerHTML = `<h1 class="text-3xl font-black mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-500">資安讚 | 數位診斷</h1><p class="text-slate-400 text-center mb-8">選擇您的行業類型</p><div class="flex flex-col gap-3">${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-bold text-left text-sm">${ind}</button>`).join('')}</div>`;
         } else if (state.step === 'role') {
@@ -263,15 +267,15 @@
             const q = quizData[state.industry][state.role][state.currentQ];
             app.innerHTML = `<div class="mb-4 flex justify-between items-center text-[10px] font-bold tracking-widest text-sky-400"><span>PROGRESS ${state.currentQ + 1} / 10</span><span class="truncate ml-4">${state.industry}</span></div><div class="w-full bg-slate-800 h-1.5 rounded-full mb-8"><div class="bg-sky-500 h-1.5 rounded-full transition-all duration-500" style="width: ${(state.currentQ + 1) * 10}%"></div></div><h2 class="question-text">${q[0]}</h2><div class="flex flex-col gap-3">${[0, 5, 10, 15].map((s, i) => `<button onclick="answer(${s})" class="btn-choice p-4 rounded-xl font-medium border border-white/5">${q[i+1]}</button>`).join('')}</div><div onclick="goBack()" class="back-btn mt-8 py-3 border border-white/5 rounded-xl">← 返回上一題</div>`;
         } else if (state.step === 'result') {
-            app.innerHTML = `<h2 class="text-2xl font-black mb-4 text-center text-white">測驗完成！</h2><p class="text-slate-400 text-center mb-8">輸入電子郵件，即刻解鎖深度診斷報告</p><input type="email" id="email" class="w-full bg-slate-900 border border-slate-700 p-5 rounded-2xl outline-none focus:border-sky-500 text-lg mb-6" placeholder="your-email@example.com"><button onclick="submit()" id="subBtn" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-black text-xl transition-all active:scale-95 shadow-lg shadow-sky-900/20">查看診斷結果</button><p id="msg" class="hidden text-center mt-6 text-sky-400 font-bold animate-pulse">正在運算風險數據...</p>`;
+            app.innerHTML = `<h2 class="text-2xl font-black mb-4 text-center text-white">測驗完成！</h2><p class="text-slate-400 text-center mb-8">輸入電子郵件，即刻解鎖深度診斷報告</p><input type="email" id="email" class="w-full bg-slate-900 border border-slate-700 p-5 rounded-2xl outline-none focus:border-sky-500 text-lg mb-6" placeholder="your-email@example.com"><button onclick="submit()" id="subBtn" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-black text-xl transition-all active:scale-95 shadow-lg shadow-sky-900/20">查看診斷結果</button><div id="msg" class="hidden text-center mt-6 text-sky-400 font-bold animate-pulse"><div class="loading-spinner"></div>正在運算風險數據與法律評估...</div>`;
         } else if (state.step === 'finish') {
-            const isHigh = state.score >= 50; // 調整標準：50分即高危
-            const isMid = state.score >= 25 && state.score < 50;
+            const isHigh = state.score >= 80; // 優化標準：80分以上為極高危
+            const isMid = state.score >= 40 && state.score < 80;
             let status = isHigh ? "🚨 極高危險：經營與法律危機" : (isMid ? "⚡ 中度風險：存在外洩漏洞" : "✅ 安全良好");
             let statusColor = isHigh ? "text-red-500" : (isMid ? "text-amber-500" : "text-emerald-500");
             let cardClass = isHigh ? "critical-alert bg-red-600/20" : "bg-slate-900/60";
 
-            app.innerHTML = `<div class="text-center">${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-black text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}<h2 class="text-3xl font-black mb-2">數位風險報告</h2><p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p><div class="${cardClass} p-10 rounded-[32px] border border-white/10 mb-8 transition-all duration-1000"><div id="animatedScore" class="text-9xl font-black mb-4 tracking-tighter ${statusColor}">100</div><div class="text-4xl font-black mb-6 ${statusColor} uppercase tracking-tighter">${status}</div><div class="text-left space-y-6 border-t border-white/10 pt-8">${isHigh ? `<div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>法律訴訟：</b>依《個資法》外洩最高可處 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>財務重創：</b>目前勒索病毒平均贖金已達 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">150 萬美金</span>，且不保證恢復。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>商譽崩潰：</b>一旦數據外流，品牌信任度將在 24 小時內徹底崩潰。</p></div><div class="mt-8 p-6 bg-red-500 text-white rounded-xl text-center font-black text-lg shadow-lg">⚠️ 建議立即停止所有高風險操作，並尋求專業防護升級。</div>` : isMid ? `<div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。</p></div><div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">員工行為缺乏管理，極易成為駭客植入木馬的破口。</p></div>` : `<div class="flex gap-3 items-start"><span class="text-emerald-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">資安意識優於平均，請持續保持分權管理與定期備份習慣。</p></div>`}</div></div><button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-bold text-sm">重新掃描風險</button></div>`;
+            app.innerHTML = `<div class="text-center">${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-black text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}<h2 class="text-3xl font-black mb-2">數位風險報告</h2><p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p><div class="${cardClass} p-10 rounded-[32px] border border-white/10 mb-8 transition-all duration-1000"><div id="animatedScore" class="text-9xl font-black mb-4 tracking-tighter ${statusColor}">100</div><div class="text-4xl font-black mb-6 ${statusColor} uppercase tracking-tighter">${status}</div><div class="text-left space-y-6 border-t border-white/10 pt-8">${isHigh ? `<div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>法律訴訟：</b>依《個資法》第 47 條，外洩最高可處 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>刑事責任：</b>若涉及商業秘密外流，最高可處 5 年有期徒刑並併科罰金。</p></div><div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-lg text-slate-200"><b>財務重創：</b>勒索病毒平均贖金持續攀升，且商譽損害難以估計。</p></div><div class="mt-8 p-6 bg-red-500 text-white rounded-xl text-center font-black text-lg shadow-lg">⚠️ 建議立即停止所有高風險操作，並尋求專業防護升級。</div>` : isMid ? `<div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。</p></div><div class="flex gap-3 items-start"><span class="text-amber-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">員工行為缺乏管理，極易成為駭客植入木馬的破口。</p></div>` : `<div class="flex gap-3 items-start"><span class="text-emerald-500 text-xl">●</span><p class="text-base text-slate-300 font-bold">資安意識優於平均，請持續保持分權管理與定期備份習慣。</p></div>`}</div></div><button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-bold text-sm">重新掃描風險</button></div>`;
             
             setTimeout(startScoreAnimation, 200);
         }
@@ -300,7 +304,7 @@
         const btn = document.getElementById('subBtn');
         const msg = document.getElementById('msg');
         btn.disabled = true; msg.classList.remove('hidden');
-        const rankText = state.score >= 50 ? "高度風險" : (state.score >= 25 ? "中度風險" : "低度風險");
+        const rankText = state.score >= 80 ? "極高危險" : (state.score >= 40 ? "中度風險" : "低度風險");
         try {
             await emailjs.send("service_2kl2ayr", "template_jsl6mbh", { user_email: mail, score: state.score, rank: rankText, industry: state.industry, role: state.role });
             const body = new URLSearchParams({ "entry.1189791047": state.industry, "entry.1232382204": state.role, "entry.1872913577": state.score, "entry.1057217280": rankText, "entry.1218395545": mail });
