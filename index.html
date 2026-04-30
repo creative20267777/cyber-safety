@@ -31,8 +31,7 @@
             transition: all 0.2s ease; font-size: 1.05rem; line-height: 1.4; text-align: left;
         }
         .btn-choice:hover { background: rgba(14, 165, 233, 0.2); border-color: var(--primary-blue); transform: translateY(-2px); }
- 
-        /* ── CHANGE 1: question font weight lightened from 800→500 for readability ── */
+
         .question-text {
             font-size: 1.4rem;
             line-height: 1.5;
@@ -44,15 +43,24 @@
         @media (min-width: 640px) {
             .question-text { font-size: 1.5rem; }
         }
- 
+
+        /* CHANGE 1: All non-score/risk text uses Noto Sans TC weight 400/500 */
+        .result-body-text {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 400;
+        }
+        .result-body-text b,
+        .result-body-text strong {
+            font-weight: 500;
+        }
+
         .back-btn { color: #94a3b8; transition: 0.3s; font-size: 0.9rem; cursor: pointer; text-align: center; display: block; margin-top: 20px; }
         .back-btn:hover { color: #fff; }
         @keyframes alert-pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.02); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
         .critical-alert { animation: alert-pulse 1s infinite; border: 4px solid #ef4444 !important; }
         .loading-spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #0ea5e9; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
- 
-        /* ── CHANGE 2a: CTA button on result page — clearer arrow + urgent copy ── */
+
         @keyframes lead-btn-pulse {
             0%, 100% { box-shadow: 0 0 14px rgba(239, 68, 68, 0.55), 0 25px 50px -12px rgba(0, 0, 0, 0.6); }
             50% { box-shadow: 0 0 36px rgba(239, 68, 68, 1), 0 25px 50px -12px rgba(0, 0, 0, 0.6); }
@@ -78,8 +86,7 @@
             transform: scale(1.03) translateY(-3px);
             background-image: linear-gradient(to right, #ef4444, #f97316);
         }
- 
-        /* ── CHANGE 2b: form CTA button on lead page ── */
+
         .submit-lead-btn {
             transition: all 0.3s ease;
             position: relative;
@@ -96,19 +103,60 @@
             transform: rotate(-45deg); transition: all 0.6s; opacity: 0;
         }
         .submit-lead-btn:hover::after { left: 100%; top: 100%; opacity: 1; }
- 
-        /* Arrow bounce on CTA */
+
         @keyframes arrowBounce {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(5px); }
         }
         .arrow-bounce { display: inline-block; animation: arrowBounce 1s infinite; }
+
+        /* CHANGE 2: Refined hero title */
+        .hero-title {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.25rem;
+        }
+        .hero-title .brand {
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .sep {
+            color: rgba(148, 163, 184, 0.35);
+            font-weight: 300;
+            margin: 0 0.35rem;
+        }
+        .hero-title .sub {
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+        }
+        .hero-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: #0ea5e9;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            opacity: 0.7;
+        }
+        .hero-divider {
+            width: 36px;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, transparent);
+            margin: 0.9rem auto 1.5rem;
+        }
     </style>
 </head>
 <body>
- 
+
 <div id="app" class="glass-card"></div>
- 
+
 <script>
     const quizData = {
         "🏥 醫療 / 診所": {
@@ -320,54 +368,64 @@
             ]
         }
     };
- 
+
     let state = { step: 'start', industry: '', role: '', currentQ: 0, score: 0, history: [], email: '' };
- 
+
     function render() {
         const app = document.getElementById('app');
         window.scrollTo(0, 0);
- 
+
         if (state.step === 'start') {
-            app.innerHTML = `<h1 class="text-3xl font-black mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-500">資安讚 | 數位診斷</h1><p class="text-slate-400 text-center mb-8">選擇您的行業類型</p><div class="flex flex-col gap-3">${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-bold text-left text-sm">${ind}</button>`).join('')}</div>`;
+            /* CHANGE 2: Refined hero title design */
+            app.innerHTML = `
+                <div class="text-center mb-8">
+                    <p class="hero-eyebrow">Security Assessment Tool</p>
+                    <h1 class="hero-title">
+                        <span class="brand">資安讚</span><span class="sep">|</span><span class="sub">數位診斷</span>
+                    </h1>
+                    <div class="hero-divider"></div>
+                    <p class="text-slate-400 text-sm tracking-wide">選擇您的行業類型，開始評估</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    ${Object.keys(quizData).map(ind => `<button onclick="selectInd('${ind}')" class="btn-choice p-4 rounded-xl font-medium text-left text-sm">${ind}</button>`).join('')}
+                </div>`;
         } else if (state.step === 'role') {
-            app.innerHTML = `<h2 class="text-2xl font-bold mb-8 text-center text-white">您的身分是？</h2><div class="flex flex-col gap-5"><button onclick="selectRole('老闆')" class="btn-choice p-6 rounded-2xl font-black text-xl text-center">老闆 / 主管</button><button onclick="selectRole('員工')" class="btn-choice p-6 rounded-2xl font-black text-xl text-center">員工 / 職員</button><button onclick="goBack()" class="back-btn">← 返回選擇行業</button></div>`;
+            app.innerHTML = `<h2 class="text-2xl font-medium mb-8 text-center text-white">您的身分是？</h2><div class="flex flex-col gap-5"><button onclick="selectRole('老闆')" class="btn-choice p-6 rounded-2xl font-medium text-xl text-center">老闆 / 主管</button><button onclick="selectRole('員工')" class="btn-choice p-6 rounded-2xl font-medium text-xl text-center">員工 / 職員</button><button onclick="goBack()" class="back-btn">← 返回選擇行業</button></div>`;
         } else if (state.step === 'quiz') {
             const q = quizData[state.industry][state.role][state.currentQ];
-            app.innerHTML = `<div class="mb-4 flex justify-between items-center text-[10px] font-bold tracking-widest text-sky-400"><span>PROGRESS ${state.currentQ + 1} / 10</span><span class="truncate ml-4">${state.industry}</span></div><div class="w-full bg-slate-800 h-1.5 rounded-full mb-8"><div class="bg-sky-500 h-1.5 rounded-full transition-all duration-500" style="width: ${(state.currentQ + 1) * 10}%"></div></div><h2 class="question-text">${q[0]}</h2><div class="flex flex-col gap-3">${[0, 5, 10, 15].map((s, i) => `<button onclick="answer(${s})" class="btn-choice p-4 rounded-xl font-medium border border-white/5">${q[i+1]}</button>`).join('')}</div><div onclick="goBack()" class="back-btn mt-8 py-3 border border-white/5 rounded-xl">← 返回上一題</div>`;
+            app.innerHTML = `<div class="mb-4 flex justify-between items-center text-[10px] font-medium tracking-widest text-sky-400"><span>PROGRESS ${state.currentQ + 1} / 10</span><span class="truncate ml-4">${state.industry}</span></div><div class="w-full bg-slate-800 h-1.5 rounded-full mb-8"><div class="bg-sky-500 h-1.5 rounded-full transition-all duration-500" style="width: ${(state.currentQ + 1) * 10}%"></div></div><h2 class="question-text">${q[0]}</h2><div class="flex flex-col gap-3">${[0, 5, 10, 15].map((s, i) => `<button onclick="answer(${s})" class="btn-choice p-4 rounded-xl font-medium border border-white/5">${q[i+1]}</button>`).join('')}</div><div onclick="goBack()" class="back-btn mt-8 py-3 border border-white/5 rounded-xl">← 返回上一題</div>`;
         } else if (state.step === 'result') {
-            app.innerHTML = `<h2 class="text-2xl font-black mb-4 text-center text-white">測驗完成！</h2><p class="text-slate-400 text-center mb-8">輸入電子郵件，即刻解鎖深度診斷報告</p><input type="email" id="email" class="w-full bg-slate-900 border border-slate-700 p-5 rounded-2xl outline-none focus:border-sky-500 text-lg mb-6" placeholder="your-email@example.com"><button onclick="submit()" id="subBtn" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-black text-xl transition-all active:scale-95 shadow-lg shadow-sky-900/20">查看診斷結果</button><div id="msg" class="hidden text-center mt-6 text-sky-400 font-bold animate-pulse"><div class="loading-spinner"></div>正在運算風險數據與法律評估...</div>`;
+            app.innerHTML = `<h2 class="text-2xl font-medium mb-4 text-center text-white">測驗完成！</h2><p class="text-slate-400 text-center mb-8">輸入電子郵件，即刻解鎖深度診斷報告</p><input type="email" id="email" class="w-full bg-slate-900 border border-slate-700 p-5 rounded-2xl outline-none focus:border-sky-500 text-lg mb-6" placeholder="your-email@example.com"><button onclick="submit()" id="subBtn" class="w-full bg-sky-600 hover:bg-sky-500 py-5 rounded-2xl font-medium text-xl transition-all active:scale-95 shadow-lg shadow-sky-900/20">查看診斷結果</button><div id="msg" class="hidden text-center mt-6 text-sky-400 font-medium animate-pulse"><div class="loading-spinner"></div>正在運算風險數據與法律評估...</div>`;
         } else if (state.step === 'finish') {
             const isHigh = state.score >= 80;
             const isMid = state.score >= 40 && state.score < 80;
             let status = isHigh ? "🚨 極高危險：經營與法律危機" : (isMid ? "⚡ 中度風險：存在外洩漏洞" : "✅ 安全良好");
             let statusColor = isHigh ? "text-red-500" : (isMid ? "text-amber-500" : "text-emerald-500");
             let cardClass = isHigh ? "critical-alert bg-red-600/20" : "bg-slate-900/60";
- 
+
             app.innerHTML = `
                 <div class="text-center">
-                    ${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-black text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}
-                    <h2 class="text-3xl font-black mb-2">數位風險報告</h2>
+                    ${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-medium text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}
+                    <h2 class="text-3xl font-medium mb-2">數位風險報告</h2>
                     <p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p>
                     <div class="${cardClass} p-8 sm:p-10 rounded-[32px] border border-white/10 mb-8 transition-all duration-1000">
                         <div id="animatedScore" class="text-8xl sm:text-9xl font-black mb-4 tracking-tighter ${statusColor}">100</div>
                         <div class="text-3xl sm:text-4xl font-black mb-6 ${statusColor} uppercase tracking-tighter leading-tight">${status}</div>
-                        <div class="text-left space-y-6 border-t border-white/10 pt-8 text-base sm:text-lg">
+                        <div class="result-body-text text-left space-y-6 border-t border-white/10 pt-8 text-base sm:text-lg">
                             ${isHigh ? `
                                 <div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-slate-200"><b>法律訴訟：</b>依《個資法》第 47 條，外洩最高可處 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div>
                                 <div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-slate-200"><b>刑事責任：</b>若涉及商業秘密外流，最高可處 5 年有期徒刑並併科罰金。</p></div>
                             ` : `
-                                <div class="flex gap-3 items-start"><span class="${isMid?'text-amber-500':'text-emerald-500'} text-xl">●</span><p class="text-slate-300 font-bold">${isMid?'現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。':'資安意識優於平均，請持續保持分權管理與定期備份習慣。'}</p></div>
+                                <div class="flex gap-3 items-start"><span class="${isMid?'text-amber-500':'text-emerald-500'} text-xl">●</span><p class="text-slate-300">${isMid?'現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。':'資安意識優於平均，請持續保持分權管理與定期備份習慣。'}</p></div>
                             `}
                         </div>
                     </div>
                     
                     <div class="space-y-5">
-                        <button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-bold text-sm">
+                        <button onclick="location.reload()" class="w-full py-4 bg-white/5 hover:bg-white/10 rounded-xl text-slate-500 hover:text-white transition font-medium text-sm">
                             重新掃描風險
                         </button>
-                        
-                        <!-- CHANGE 2a: Clearer CTA — tells user there's a next page and what they'll get -->
-                        <button onclick="goLeadPage()" class="w-full py-5 bg-gradient-to-r from-red-700 to-orange-700 rounded-2xl text-white font-black text-xl active:scale-95 shadow-xl lead-btn-animate">
+                        <button onclick="goLeadPage()" class="w-full py-5 bg-gradient-to-r from-red-700 to-orange-700 rounded-2xl text-white font-medium text-xl active:scale-95 shadow-xl lead-btn-animate">
                             立即了解如何降低您的法律風險 <span class="arrow-bounce">→</span>
                         </button>
                     </div>
@@ -375,34 +433,37 @@
             
             setTimeout(startScoreAnimation, 200);
         } else if (state.step === 'lead') {
+            /* CHANGE 5: Cleaner, less dense legal section with 3 focused cards */
             app.innerHTML = `
                 <div class="text-center py-6 sm:py-10">
                     <div class="mb-10 text-red-500 animate-pulse">
                         <svg class="w-20 h-20 sm:w-24 sm:h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     </div>
-                    <h2 class="text-3xl font-black mb-6 text-white leading-snug">資安漏洞可能就在<br><span class="text-red-500 underline decoration-wavy decoration-red-900/50">您的疏忽中產生...</span></h2>
-                    <p class="text-xl text-slate-300 mb-10 font-medium leading-relaxed">與其在災難發生後支付千萬賠償，不如現在就建立專業級的數位防線。</p>
- 
-                    <!-- CHANGE 3: Replaced generic quote with specific legal articles -->
-                    <div class="p-6 bg-white/5 rounded-2xl mb-6 text-left border-l-4 border-red-500 leading-relaxed text-sm sm:text-base space-y-3">
-                        <p class="text-red-400 font-black text-base tracking-wide uppercase">⚖️ 您需要知道的法律責任</p>
-                        <p class="text-slate-300">
-                            <span class="text-white font-bold">《個人資料保護法》第 15、16 條：</span>
-                            非公務機關蒐集、處理個資須有明確特定目的，違者除行政裁罰外，當事人得請求損害賠償，<span class="text-red-400 font-bold">每人每事件最高求償 200 萬元</span>。
-                        </p>
-                        <p class="text-slate-300">
-                            <span class="text-white font-bold">《個資法》第 47 條：</span>
-                            非公務機關違反規定，主管機關得處 <span class="text-red-400 font-bold">2 萬至 1,500 萬元罰鍰</span>，情節重大者並得限期停業。
-                        </p>
-                        <p class="text-slate-300">
-                            <span class="text-white font-bold">《營業秘密法》第 13-1 條：</span>
-                            意圖在境內外使用，以不正當方法取得、使用或洩漏營業秘密者，<span class="text-red-400 font-bold">最高處 5 年有期徒刑，得併科 1,000 萬元罰金</span>。
-                        </p>
+                    <h2 class="text-3xl font-medium mb-6 text-white leading-snug">資安漏洞可能就在<br><span class="text-red-500 underline decoration-wavy decoration-red-900/50">您的疏忽中產生...</span></h2>
+                    <p class="text-xl text-slate-300 mb-10 font-medium leading-relaxed result-body-text">與其在災難發生後支付千萬賠償，不如現在就建立專業級的數位防線。</p>
+
+                    <!-- CHANGE 5: Redesigned legal section — 3 compact cards, less text density -->
+                    <div class="space-y-3 mb-10 text-left">
+                        <p class="text-red-400 font-medium text-xs tracking-widest uppercase mb-4">⚖️ 您需要知道的法律責任</p>
+
+                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-red-500 result-body-text">
+                            <p class="text-white font-medium text-sm mb-1">個資法 §15、§16｜個人損害賠償</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">蒐集、處理個資須有特定目的，違者當事人可請求賠償，<span class="text-red-400">每人每件最高 200 萬元</span>。</p>
+                        </div>
+
+                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-orange-500 result-body-text">
+                            <p class="text-white font-medium text-sm mb-1">個資法 §47｜行政裁罰</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">主管機關得處 <span class="text-orange-400">2 萬至 1,500 萬元罰鍰</span>，情節重大者得令停業。</p>
+                        </div>
+
+                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-yellow-500 result-body-text">
+                            <p class="text-white font-medium text-sm mb-1">營業秘密法 §13-1｜刑事責任</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">洩漏或不當取得營業秘密，<span class="text-yellow-400">最高 5 年有期徒刑，併科 1,000 萬元罰金</span>。</p>
+                        </div>
                     </div>
                     
-                    
-                    <!-- CHANGE 2b: Clearer form CTA — explicit about what happens after clicking -->
-                    <button onclick="openForm()" class="w-full py-6 bg-sky-600 rounded-2xl text-white font-black text-xl active:scale-95 shadow-2xl submit-lead-btn">
+                    <!-- CHANGE 4: Updated CTA copy -->
+                    <button onclick="openForm()" class="w-full py-6 bg-sky-600 rounded-2xl text-white font-medium text-xl active:scale-95 shadow-2xl submit-lead-btn">
                         立即加入開發計畫，預約您的輕量化防護 <span class="arrow-bounce">→</span>
                     </button>
                     
@@ -410,7 +471,7 @@
                 </div>`;
         }
     }
- 
+
     function selectInd(i) { pushState({ step: 'role', industry: i }); }
     function selectRole(r) { pushState({ step: 'quiz', role: r, currentQ: 0, score: 0 }); }
     function answer(p) { if (state.currentQ < 9) pushState({ currentQ: state.currentQ + 1, score: state.score + p }); else pushState({ step: 'result', score: state.score + p }); }
@@ -418,7 +479,7 @@
     function goBack() { if (state.history.length > 0) { state = state.history.pop(); render(); } }
     function goLeadPage() { pushState({ step: 'lead' }); }
     function openForm() { window.open("https://docs.google.com/forms/d/e/1FAIpQLSfyKcd3E9jPZL5JXlN8gJABMYpSP4kf6zbSiZ-tZCnr2KKZvg/viewform?entry.1332400305=jennycheng1116%40gmail.com", "_blank"); }
- 
+
     function startScoreAnimation() {
         const el = document.getElementById('animatedScore');
         if(!el) return;
@@ -429,7 +490,7 @@
             else { current--; el.innerText = current; }
         }, 30);
     }
- 
+
     async function submit() {
         const mail = document.getElementById('email').value;
         if(!mail.includes('@')) return alert('請輸入有效的電子郵件');
@@ -449,4 +510,3 @@
 </script>
 </body>
 </html>
- 
