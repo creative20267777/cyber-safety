@@ -44,7 +44,6 @@
             .question-text { font-size: 1.5rem; }
         }
 
-        /* CHANGE 1: All non-score/risk text uses Noto Sans TC weight 400/500 */
         .result-body-text {
             font-family: 'Noto Sans TC', sans-serif;
             font-weight: 400;
@@ -110,7 +109,6 @@
         }
         .arrow-bounce { display: inline-block; animation: arrowBounce 1s infinite; }
 
-        /* CHANGE 2: Refined hero title */
         .hero-title {
             font-family: 'Noto Sans TC', sans-serif;
             font-weight: 900;
@@ -376,7 +374,6 @@
         window.scrollTo(0, 0);
 
         if (state.step === 'start') {
-            /* CHANGE 2: Refined hero title design */
             app.innerHTML = `
                 <div class="text-center mb-8">
                     <p class="hero-eyebrow">Security Assessment Tool</p>
@@ -433,16 +430,11 @@
             
             setTimeout(startScoreAnimation, 200);
         } else if (state.step === 'lead') {
-            /* CHANGE 5: Cleaner, less dense legal section with 3 focused cards */
             app.innerHTML = `
                 <div class="text-center py-6 sm:py-10">
-                    <div class="mb-10 text-red-500 animate-pulse">
-                        <svg class="w-20 h-20 sm:w-24 sm:h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    </div>
-                    <h2 class="text-3xl font-medium mb-6 text-white leading-snug">資安漏洞可能就在<br><span class="text-red-500 underline decoration-wavy decoration-red-900/50">您的疏忽中產生...</span></h2>
-                    <p class="text-xl text-slate-300 mb-10 font-medium leading-relaxed result-body-text">與其在災難發生後支付千萬賠償，不如現在就建立專業級的數位防線。</p>
+                    <h2 class="text-3xl font-medium mb-6 text-white leading-snug">與其在災難發生後支付千萬賠償，<br>不如現在就建立專業級的數位防線。</h2>
+                    <p class="text-xl text-slate-300 mb-10 font-medium leading-relaxed result-body-text"></p>
 
-                    <!-- CHANGE 5: Redesigned legal section — 3 compact cards, less text density -->
                     <div class="space-y-3 mb-10 text-left">
                         <p class="text-red-400 font-medium text-xs tracking-widest uppercase mb-4">⚖️ 您需要知道的法律責任</p>
 
@@ -462,8 +454,7 @@
                         </div>
                     </div>
                     
-                    <!-- CHANGE 4: Updated CTA copy -->
-                    <button onclick="openForm()" class="w-full py-6 bg-sky-600 rounded-2xl text-white font-medium text-xl active:scale-95 shadow-2xl submit-lead-btn">
+                    <button onclick="openForm()" class="w-full py-6 bg-sky-600 rounded-2xl text-white font-medium text-lg active:scale-95 shadow-2xl submit-lead-btn whitespace-nowrap">
                         立即加入開發計畫，預約您的輕量化防護 <span class="arrow-bounce">→</span>
                     </button>
                     
