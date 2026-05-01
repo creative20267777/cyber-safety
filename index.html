@@ -86,22 +86,28 @@
             background-image: linear-gradient(to right, #ef4444, #f97316);
         }
 
+        @keyframes blue-btn-pulse {
+            0%, 100% { box-shadow: 0 0 14px rgba(14, 165, 233, 0.55), 0 25px 50px -12px rgba(0, 0, 0, 0.6); }
+            50% { box-shadow: 0 0 36px rgba(14, 165, 233, 1), 0 25px 50px -12px rgba(0, 0, 0, 0.6); }
+        }
         .submit-lead-btn {
+            animation: blue-btn-pulse 2s infinite ease-in-out;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
+        .submit-lead-btn::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: shimmer 2.5s infinite;
+        }
         .submit-lead-btn:hover {
-            transform: scale(1.04) translateY(-2px);
+            transform: scale(1.03) translateY(-3px);
             background-color: #0284c7;
-            box-shadow: 0 0 24px rgba(14,165,233,0.5);
+            box-shadow: 0 0 40px rgba(14,165,233,1);
         }
-        .submit-lead-btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 60%, rgba(255,255,255,0) 100%);
-            transform: rotate(-45deg); transition: all 0.6s; opacity: 0;
-        }
-        .submit-lead-btn:hover::after { left: 100%; top: 100%; opacity: 1; }
 
         @keyframes arrowBounce {
             0%, 100% { transform: translateX(0); }
@@ -109,6 +115,11 @@
         }
         .arrow-bounce { display: inline-block; animation: arrowBounce 1s infinite; }
 
+        @keyframes scanline {
+            0% { opacity: 0.4; transform: scaleX(0.6); }
+            50% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0.4; transform: scaleX(0.6); }
+        }
         .hero-title {
             font-family: 'Noto Sans TC', sans-serif;
             font-weight: 900;
@@ -403,17 +414,17 @@
             app.innerHTML = `
                 <div class="text-center">
                     ${isHigh ? `<div class="mb-6 py-4 bg-red-600 text-white font-medium text-xl animate-bounce rounded-xl shadow-2xl">⚠️ 重大資安警報：您已面臨法律訴訟風險</div>` : ''}
-                    <h2 class="text-3xl font-medium mb-2">數位風險報告</h2>
-                    <p class="text-slate-500 mb-8 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p>
-                    <div class="${cardClass} p-8 sm:p-10 rounded-[32px] border border-white/10 mb-8 transition-all duration-1000">
-                        <div id="animatedScore" class="text-8xl sm:text-9xl font-black mb-4 tracking-tighter ${statusColor}">100</div>
-                        <div class="text-3xl sm:text-4xl font-black mb-6 ${statusColor} uppercase tracking-tighter leading-tight">${status}</div>
-                        <div class="result-body-text text-left space-y-6 border-t border-white/10 pt-8 text-base sm:text-lg">
+                    <h2 class="text-2xl font-medium mb-1">數位風險報告</h2>
+                    <p class="text-slate-500 mb-4 text-xs tracking-widest">報告編號：SR-${Math.floor(Math.random()*90000+10000)} | 數據已存證</p>
+                    <div class="${cardClass} p-5 sm:p-6 rounded-[24px] border border-white/10 mb-5 transition-all duration-1000">
+                        <div id="animatedScore" class="text-7xl sm:text-8xl font-black mb-2 tracking-tighter ${statusColor}">100</div>
+                        <div class="text-2xl sm:text-3xl font-black mb-4 ${statusColor} uppercase tracking-tighter leading-tight">${status}</div>
+                        <div class="result-body-text text-left space-y-3 border-t border-white/10 pt-4 text-sm sm:text-base">
                             ${isHigh ? `
-                                <div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-slate-200"><b>法律訴訟：</b>依《個資法》第 47 條，外洩最高可處 <span class="text-red-500 font-black text-2xl underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div>
-                                <div class="flex gap-4 items-start"><span class="text-red-500 text-2xl">●</span><p class="text-slate-200"><b>刑事責任：</b>若涉及商業秘密外流，最高可處 5 年有期徒刑並併科罰金。</p></div>
+                                <div class="flex gap-3 items-start"><span class="text-red-500 text-lg">●</span><p class="text-slate-200"><b>法律訴訟：</b>依《個資法》第 47 條，外洩最高可處 <span class="text-red-500 font-black text-lg underline decoration-red-500/50">1,500 萬元罰鍰</span>。</p></div>
+                                <div class="flex gap-3 items-start"><span class="text-red-500 text-lg">●</span><p class="text-slate-200"><b>刑事責任：</b>若涉及商業秘密外流，最高可處 5 年有期徒刑並併科罰金。</p></div>
                             ` : `
-                                <div class="flex gap-3 items-start"><span class="${isMid?'text-amber-500':'text-emerald-500'} text-xl">●</span><p class="text-slate-300">${isMid?'現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。':'資安意識優於平均，請持續保持分權管理與定期備份習慣。'}</p></div>
+                                <div class="flex gap-3 items-start"><span class="${isMid?'text-amber-500':'text-emerald-500'} text-lg">●</span><p class="text-slate-300">${isMid?'現有流程存在明顯漏洞，隨時可能演變為刑事法律事件。':'資安意識優於平均，請持續保持分權管理與定期備份習慣。'}</p></div>
                             `}
                         </div>
                     </div>
@@ -431,26 +442,45 @@
             setTimeout(startScoreAnimation, 200);
         } else if (state.step === 'lead') {
             app.innerHTML = `
-                <div class="text-center py-6 sm:py-10">
-                    <h2 class="text-3xl font-medium mb-6 text-white leading-snug">與其在災難發生後支付千萬賠償，<br>不如現在就建立專業級的數位防線。</h2>
-                    <p class="text-xl text-slate-300 mb-10 font-medium leading-relaxed result-body-text"></p>
+                <div class="text-center py-2">
+                    <div class="relative mb-4">
+                        <!-- 警示條紋背景 -->
+                        <div style="position:absolute;inset:0;border-radius:16px;background:repeating-linear-gradient(135deg,rgba(239,68,68,0.04) 0px,rgba(239,68,68,0.04) 2px,transparent 2px,transparent 12px);pointer-events:none;"></div>
+                        <!-- 頂部警示線 -->
+                        <div style="height:3px;background:linear-gradient(90deg,transparent,#ef4444,#f97316,#ef4444,transparent);border-radius:99px;margin-bottom:12px;animation:scanline 3s linear infinite;" class="w-full"></div>
+                        
+                        <div class="px-2">
+                            <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:99px;padding:3px 12px;margin-bottom:8px;">
+                                <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;animation:alert-pulse 1s infinite;flex-shrink:0;"></span>
+                                <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;color:#ef4444;text-transform:uppercase;">Risk Warning</span>
+                            </div>
+                            <h2 style="font-size:1.4rem;font-weight:900;line-height:1.25;letter-spacing:-0.02em;margin-bottom:4px;">
+                                <span style="color:#f1f5f9;">與其在災難發生後</span><br>
+                                <span style="background:linear-gradient(90deg,#ef4444,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">支付千萬賠償</span>
+                            </h2>
+                            <p style="font-size:0.85rem;color:#94a3b8;font-weight:400;letter-spacing:0.03em;">不如現在就建立專業級的數位防線</p>
+                        </div>
+                        
+                        <!-- 底部警示線 -->
+                        <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.4),transparent);margin-top:12px;"></div>
+                    </div>
 
-                    <div class="space-y-3 mb-10 text-left">
-                        <p class="text-red-400 font-medium text-xs tracking-widest uppercase mb-4">⚖️ 您需要知道的法律責任</p>
+                    <div class="space-y-2 mb-4 text-left">
+                        <p class="text-red-400 font-medium text-xs tracking-widest uppercase mb-2">⚖️ 您需要知道的法律責任</p>
 
-                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-red-500 result-body-text">
-                            <p class="text-white font-medium text-sm mb-1">個資法 §15、§16｜個人損害賠償</p>
-                            <p class="text-slate-400 text-sm leading-relaxed">蒐集、處理個資須有特定目的，違者當事人可請求賠償，<span class="text-red-400">每人每件最高 200 萬元</span>。</p>
+                        <div class="p-3 bg-white/5 rounded-xl border-l-2 border-red-500 result-body-text">
+                            <p class="text-white font-medium text-xs mb-0.5">個資法 §15、§16｜個人損害賠償</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">蒐集、處理個資須有特定目的，違者當事人可請求賠償，<span class="text-red-400">每人每件最高 200 萬元</span>。</p>
                         </div>
 
-                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-orange-500 result-body-text">
-                            <p class="text-white font-medium text-sm mb-1">個資法 §47｜行政裁罰</p>
-                            <p class="text-slate-400 text-sm leading-relaxed">主管機關得處 <span class="text-orange-400">2 萬至 1,500 萬元罰鍰</span>，情節重大者得令停業。</p>
+                        <div class="p-3 bg-white/5 rounded-xl border-l-2 border-orange-500 result-body-text">
+                            <p class="text-white font-medium text-xs mb-0.5">個資法 §47｜行政裁罰</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">主管機關得處 <span class="text-orange-400">2 萬至 1,500 萬元罰鍰</span>，情節重大者得令停業。</p>
                         </div>
 
-                        <div class="p-4 bg-white/5 rounded-xl border-l-2 border-yellow-500 result-body-text">
-                            <p class="text-white font-medium text-sm mb-1">營業秘密法 §13-1｜刑事責任</p>
-                            <p class="text-slate-400 text-sm leading-relaxed">洩漏或不當取得營業秘密，<span class="text-yellow-400">最高 5 年有期徒刑，併科 1,000 萬元罰金</span>。</p>
+                        <div class="p-3 bg-white/5 rounded-xl border-l-2 border-yellow-500 result-body-text">
+                            <p class="text-white font-medium text-xs mb-0.5">營業秘密法 §13-1｜刑事責任</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">洩漏或不當取得營業秘密，<span class="text-yellow-400">最高 5 年有期徒刑，併科 1,000 萬元罰金</span>。</p>
                         </div>
                     </div>
                     
@@ -458,7 +488,7 @@
                         立即加入開發計畫，預約您的輕量化防護 <span class="arrow-bounce">→</span>
                     </button>
                     
-                    <button onclick="goBack()" class="back-btn mt-10">← 返回結果頁面</button>
+                    <button onclick="goBack()" class="back-btn mt-4">← 返回結果頁面</button>
                 </div>`;
         }
     }
